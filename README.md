@@ -2,13 +2,13 @@
 # Angular : rendu n°2
 Repository où déposer le projet n°2 Angular
 
-### Nom[^1] :
+### Nom[^1] : Wanounou
 
-### Prénom[^2] : 
+### Prénom[^2] : Ilan
 
 ## A faire[^3]
 - [ ] Suivre le cours jusqu'à la page 180
-- [ ] Intégrer toolbar et navbar du rendu n°1
+- [x] Intégrer toolbar et navbar du rendu n°1
 - [ ] Identification par **login/password**
   - ajouter un tableau de login/password/role (avec rôle qui est soit **user** soit **admin**) dans le service d'authentification
   - modifier le code pour avoir `isLogged()` **ET** `isAdmin()` au lieu de juste `isAdmin()`

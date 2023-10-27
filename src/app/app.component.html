@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" (click)="opened=!opened">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon home-icon">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon">
+      <mat-icon>person</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/devoirs" routerLinkActive="active-link">Liste des devoirs</a>
+            <a mat-list-item routerLink="/add" routerLinkActive="active-link">Ajout d'un devoir</a>
+            <a mat-list-item routerLink="/edit" routerLinkActive="active-link">Modification d'un devoir</a>
+            <a mat-list-item routerLink="/supprimer" routerLinkActive="active-link">Suppression d'un devoir</a>
+            <a mat-list-item routerLink="/generate" routerLinkActive="active-link">Génération de données de test</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <app-assignments></app-assignments>
+      </mat-sidenav-content>
+  </mat-sidenav-container>
