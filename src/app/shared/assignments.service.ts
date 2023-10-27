@@ -11,16 +11,19 @@ import { LoggingService } from './logging.service';
 export class AssignmentsService {
   assignments:Assignment[] = [
     {
+      id: 1,
       nom: 'Devoir Angular de Buffa',
       dateDeRendu: new Date('2023-09-30'),
       rendu: false,
     },
     {
+      id: 2,
       nom: 'Devoir SQL de Mopolo',
       dateDeRendu: new Date('2023-10-30'),
       rendu: false,
     },
     {
+      id: 3,
       nom: 'Devoir gestion de Tunsi',
       dateDeRendu: new Date('2023-08-30'),
       rendu: true,
@@ -50,5 +53,10 @@ export class AssignmentsService {
     this.assignments.splice(pos,1);
 
     return of ("Assignment service: assignment supprimé ! ");
+  }
+
+  getAssignment(id:number): Observable<Assignment|undefined> {
+   return of(this.assignments.find(a => a.id == id));
+
   }
 }
