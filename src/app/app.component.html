@@ -10,11 +10,12 @@
     <button mat-icon-button class="example-icon">
       <mat-icon>person</mat-icon>
     </button>
+    <mat-slide-toggle (change)="login()">Loggin</mat-slide-toggle>
   </mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened">
         <mat-nav-list>
-            <a mat-list-item routerLink="/devoirs" routerLinkActive="active-link">Liste des devoirs</a>
+            <a mat-list-item routerLink="/home" routerLinkActive="active-link">Liste des devoirs</a>
             <a mat-list-item routerLink="/add" routerLinkActive="active-link">Ajout d'un devoir</a>
             <a mat-list-item routerLink="/edit" routerLinkActive="active-link">Modification d'un devoir</a>
             <a mat-list-item routerLink="/supprimer" routerLinkActive="active-link">Suppression d'un devoir</a>
@@ -22,6 +23,6 @@
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <app-assignments></app-assignments>
+      <router-outlet></router-outlet>
       </mat-sidenav-content>
   </mat-sidenav-container>

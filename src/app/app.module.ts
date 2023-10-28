@@ -22,16 +22,30 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
+import { EditAssignmentComponent } from './edit-assignment/edit-assignment.component';
+import { AuthGuard } from './shared/auth.guard';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
-
+const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: AssignmentsComponent },
+  { path: 'add', component: AddAssignmentComponent },
+  { path: 'assignment/:id', component: AssignmentDetailComponent },
+  { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuard] },
+ // { path: '**', component: AssignmentsComponent }
+  
+];  
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
     AssignmentsComponent,
     RenduDirective,
     NonRenduDirective,
     AddAssignmentComponent,
     AssignmentDetailComponent,
+    EditAssignmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,8 +55,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatToolbarModule,
     MatButtonModule, MatIconModule, MatDividerModule,
     MatCardModule, MatFormFieldModule, MatInputModule,
-    FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule
+    FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule, MatSlideToggleModule,
+    RouterModule.forRoot(routes)  
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

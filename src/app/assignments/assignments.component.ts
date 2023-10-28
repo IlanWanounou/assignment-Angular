@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Assignment } from './assignment.model';
+import { AssignmentsService } from 'src/app/shared/assignments.service';
 
 @Component({
   selector: 'app-assignments',
@@ -12,33 +13,17 @@ export class AssignmentsComponent implements OnInit {
   id="monParagraphe";
   boutonDesactive = true;
 
-  // pour afficher tantot le formulaire,
-  // tantot la liste des assignments
-  formVisible = false;
-
-
   assignmentSelectionne?:Assignment;
+  assignments: Assignment[] = [];
 
-  assignments:Assignment[] = [
-    {
-      nom: 'Devoir Angular de Buffa',
-      dateDeRendu: new Date('2023-09-30'),
-      rendu: false,
-    },
-    {
-      nom: 'Devoir SQL de Mopolo',
-      dateDeRendu: new Date('2023-10-30'),
-      rendu: false,
-    },
-    {
-      nom: 'Devoir gestion de Tunsi',
-      dateDeRendu: new Date('2023-08-30'),
-      rendu: true,
-    },
-  ];
+  constructor(private assignmentsService:AssignmentsService) {
+  }
 
   ngOnInit() {
     console.log(" AVANT RENDU DE LA PAGE !");
+    this.assignmentsService.getAssignments().subscribe((assignments) => {
+      this.assignments = assignments;
+    });
     /*
     setTimeout(() => {
       this.boutonDesactive = false;
@@ -59,14 +44,6 @@ export class AssignmentsComponent implements OnInit {
     this.assignmentSelectionne = a;
   }
 
-  onAddAssignmentBtnClick() {
-  this.formVisible = true;
-  }
-
-  onNouvelAssignment(event:Assignment) {
-    this.assignments.push(event);
-    this.formVisible = false;
-  }
   deleteAssignment(assignment:Assignment) {
     const index = this.assignments.findIndex(a => a === assignment);
     this.assignments.splice(index, 1);

@@ -11,6 +11,7 @@
     >
       Rendu
     </mat-checkbox>
-    <button mat-raised-button color="warn" (click)="onSubmit(assignmentTransmis)">DELETE</button>
+    <nav><a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']"><button [disabled]="!isAdmin()"  mat-stroked-button color="primary">Edit</button></a></nav>
+    <button [disabled]="!isAdmin()"  mat-raised-button color="warn" (click)="onSubmit(assignmentTransmis)">DELETE</button>
   </mat-card-content>
 </mat-card>

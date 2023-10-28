@@ -7,7 +7,7 @@ Repository où déposer le projet n°2 Angular
 ### Prénom[^2] : Ilan
 
 ## A faire[^3]
-- [ ] Suivre le cours jusqu'à la page 180
+- [x] Suivre le cours jusqu'à la page 180
 - [x] Intégrer toolbar et navbar du rendu n°1
 - [ ] Identification par **login/password**
   - ajouter un tableau de login/password/role (avec rôle qui est soit **user** soit **admin**) dans le service d'authentification
