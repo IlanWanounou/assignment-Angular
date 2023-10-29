@@ -20,7 +20,6 @@ export class AssignmentDetailComponent {
 
   getAssignment(): void {
       this.assignmentsService.getAssignment(this.route.snapshot.params['id']).subscribe(assignment => {
-        console.log(this.route.snapshot.params['id']);
         this.assignmentTransmis = assignment;
       });
   }
@@ -45,8 +44,7 @@ export class AssignmentDetailComponent {
   }
 
   isAdmin() {
-    return this.authService.loggedIn;
+    return this.authService.isAdminUser;
   }
-  
 
 }

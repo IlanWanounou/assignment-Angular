@@ -4,13 +4,12 @@
     </button>
     <span>My App</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon home-icon">
+    <button routerLink="/home" mat-icon-button class="example-icon home-icon">
       <mat-icon>home</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon">
+    <button routerLink="/login" mat-icon-button class="example-icon">
       <mat-icon>person</mat-icon>
     </button>
-    <mat-slide-toggle (change)="login()">Loggin</mat-slide-toggle>
   </mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened">

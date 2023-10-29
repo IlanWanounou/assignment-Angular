@@ -1,26 +1,58 @@
 import { Injectable } from '@angular/core';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   loggedIn = false;
+  isAdminUser = false;
 
-  logIn() {
+  logInUser() {
+    this.isAdminUser = false;
     this.loggedIn = true;
   }
 
-  logOut() {
-    this.loggedIn = false;
-  } 
+  logInAdmin() {
+    this.loggedIn = true;
+    this.isAdminUser = true;
+  }
 
-  isAdmin() {
-    const isUserAdmin = new Promise(
+  logOut() {
+    this.isAdminUser = false;
+    this.loggedIn = false;
+  }
+  
+  users:User[] = [
+    {
+      nom:"admin",
+      password:"admin",
+      isAdmin:true
+    },
+    {
+      nom:"user",
+      password:"user",
+      isAdmin:false
+    }
+  ];
+
+
+  isLogged() {
+    const isUserLogged = new Promise(
       (resolve, reject) => {
        resolve(this.loggedIn);
       }
     );
-    return isUserAdmin;
+    return isUserLogged;
+  }
+
+  isAdmin() {
+    const isAdmin = new Promise(
+      (resolve, reject) => {
+        resolve(this.isAdminUser);
+      }
+    );
+    return isAdmin;
   }
 
   constructor() { }

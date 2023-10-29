@@ -25,15 +25,17 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {Routes} from '@angular/router';
 import {RouterModule} from '@angular/router';
 import { EditAssignmentComponent } from './edit-assignment/edit-assignment.component';
-import { AuthGuard } from './shared/auth.guard';
+import { AuthGuardAdmin, AuthGuardLogged } from './shared/auth.guard';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
   { path: 'home', component: AssignmentsComponent },
   { path: 'add', component: AddAssignmentComponent },
-  { path: 'assignment/:id', component: AssignmentDetailComponent },
-  { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuard] },
+  { path: 'assignment/:id', component: AssignmentDetailComponent,  canActivate:[AuthGuardLogged] },
+  { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuardAdmin] },
  // { path: '**', component: AssignmentsComponent }
   
 ];  
@@ -46,6 +48,7 @@ const routes: Routes = [
     AddAssignmentComponent,
     AssignmentDetailComponent,
     EditAssignmentComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

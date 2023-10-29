@@ -3,7 +3,7 @@ import { CanActivateFn } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
-export const AuthGuard: CanActivateFn = (route:any , state: any) => {
+export const AuthGuardAdmin: CanActivateFn = (route:any , state: any) => {
   let authService = inject(AuthService);
   let router = inject(Router);
 
@@ -18,4 +18,20 @@ export const AuthGuard: CanActivateFn = (route:any , state: any) => {
     }
     });
   }
+
+  export const AuthGuardLogged: CanActivateFn = (route:any , state: any) => {
+    let authService = inject(AuthService);
+    let router = inject(Router);
+  
+    return authService.isLogged().then(authentifie => {
+      if (authentifie) {
+      console.log("Vous êtes connecté, navigation autorisée !");
+      return true;
+      } else {
+      console.log ("Vous n'êtes pas connecté ! Navigation refusée ! ")
+      router.navigate(["/login"]) ;
+      return false;
+      }
+      });
+    }
 
