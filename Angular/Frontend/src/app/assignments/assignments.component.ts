@@ -8,11 +8,14 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
   styleUrls: ['./assignments.component.css'],
 })
 export class AssignmentsComponent implements OnInit {
-  titre = "Formulaire d'ajout de devoir";
-  color = 'green';
-  id="monParagraphe";
-  boutonDesactive = true;
-
+  page:number = 1;
+  limit:number = 10;
+  totalPages!:number;
+  totalDocs!:number;
+  nextPage!:number;
+  prevPage!:number;
+  hasPrevPage!:number;
+  hasNextPage!:number;
   assignmentSelectionne?:Assignment;
   assignments: Assignment[] = [];
 
@@ -20,16 +23,37 @@ export class AssignmentsComponent implements OnInit {
   }
 
   ngOnInit() {
+    // this.peuplerBD();
     console.log(" AVANT RENDU DE LA PAGE !");
-    this.assignmentsService.getAssignments().subscribe((assignments) => {
-      this.assignments = assignments;
-    });
-    /*
-    setTimeout(() => {
-      this.boutonDesactive = false;
-    }, 3000)
-    */
+    this.assignmentsService.getAssignmentsPagine(this.page, this.limit).subscribe(data => {
+      this.assignments = data.docs,
+      this.totalDocs = data.totalDocs;
+      this.totalPages = data.totalPages;
+      this.nextPage = data.nextPage;
+      this.prevPage = data.prevPage;
+      this.hasNextPage = data.hasNextPage;
+      this.hasPrevPage = data.hasPrevPage;
+      console.log("data reçu")
+
+    })
   }
+  peuplerBD() {
+   // version naive et simple
+   //this.assignmentsService.peuplerBD();
+
+   // meilleure version :
+   this.assignmentsService.peuplerBDavecForkJoin()
+     .subscribe(() => {
+       console.log("LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE");
+	// replaceUrl = true = force le refresh, même si
+	// on est déjà sur la page d’accueil
+// Marche plus avec la dernière version d’angular
+       //this.router.navigate(["/home"], {replaceUrl:true});
+	// ceci marche….
+	window.location.reload();
+     })
+ }
+
   getDescription() {
     return 'Je suis un sous composant';
   }
