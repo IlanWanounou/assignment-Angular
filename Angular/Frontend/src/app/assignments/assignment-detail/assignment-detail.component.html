@@ -7,7 +7,7 @@
       {{assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy'}}
     </mat-card-subtitle>
     <mat-checkbox *ngIf="!assignmentTransmis.rendu"
-      (click)="assignmentTransmis.rendu=true"
+      (click)="onAssignmentRendu()"
     >
       Rendu
     </mat-checkbox>
