@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\Ilan\Documents\MIAGE\M1\Programmation avancée\.metadata\.plugins\org.eclipse.jdt.core
+1637731351.index
+1865797976.index

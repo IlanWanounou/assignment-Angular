@@ -1,0 +1,28 @@
+
+table tr td {
+  border: 1px solid black;
+}
+
+.rendu {
+  color:green;
+}
+
+.nonRendu {
+  color:red;
+  border:2px dashed red;
+  background-color:yellow;
+}
+
+
+#monParagraphe {
+  color:pink
+}
+
+.container {
+  display:flex;
+  flex-direction: column;
+}
+
+.btnAjout {
+  align-self: flex-end;
+}

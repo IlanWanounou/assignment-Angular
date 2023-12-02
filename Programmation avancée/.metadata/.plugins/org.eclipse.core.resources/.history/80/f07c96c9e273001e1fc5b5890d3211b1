@@ -1,0 +1,25 @@
+package tp1;
+
+public class ModuleEnseignement {
+	private String NomModule;
+	private int AnneeCréation;
+	private String NomDiplome;
+	private String NomEnseignant;
+	private Type type;
+	private Boolean rattrapage;
+	
+	
+	public ModuleEnseignement( String NomModule, int AnneeCréation, String NomDiplome,
+	String NomEnseignant,
+	Type type,
+	Boolean rattrapage) {
+		this.NomModule = NomModule;
+		this.AnneeCréation = AnneeCréation;
+		this.NomDiplome = NomDiplome;
+		this.NomEnseignant = NomEnseignant;
+		this.type = type;
+		this.rattrapage = rattrapage;
+		
+	}
+	
+}
