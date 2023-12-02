@@ -17,10 +17,10 @@
     <input matInput [matDatepicker]="picker"
           [(ngModel)]="dateDeRendu"
           name="date"
-    >
+    />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <button color="primary">Ajouter devoir</button>
+  <button  mat-raised-button color="primary">Ajouter devoir</button>
 </form>
