@@ -19,5 +19,6 @@
     <mat-divider></mat-divider>
   </a></nav>
   </mat-list>
-
+   <mat-paginator [length]="this.count" [pageSizeOptions]="[this.limit]"   [showFirstLastButtons]="true" (page)="handlePageEvent($event)" aria-label="Select page">
+    </mat-paginator>
 </main>

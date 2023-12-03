@@ -29,6 +29,8 @@ import { AuthGuardAdmin, AuthGuardLogged } from './shared/auth.guard';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -57,7 +59,7 @@ const routes: Routes = [
     MatSidenavModule,
     MatMenuModule,
     MatToolbarModule,
-    MatButtonModule, MatIconModule, MatDividerModule,
+    MatButtonModule, MatIconModule, MatDividerModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule, HttpClientModule,
     FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule, MatSlideToggleModule,
     RouterModule.forRoot(routes)

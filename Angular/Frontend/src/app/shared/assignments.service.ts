@@ -26,8 +26,8 @@ export class AssignmentsService {
   getAssignments(): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.url);
   }
-  getAssignmentsPagine(page:number, limit:number) : Observable<any> {
-    return this.http.get<any>(this.url + "?page=" + page + "&limit=" + limit)
+  getAssignmentsPagine(page: number, limit: number): Observable<any> {
+    return this.http.get<any>(this.url + '?page=' + page + '&limit=' + limit);
   }
 
   addAssignment(assignment: Assignment): Observable<any> {
@@ -57,6 +57,10 @@ export class AssignmentsService {
       }),
       catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
     );
+  }
+
+  getAssignmentCount() :Observable <any> {
+    return this.http.get<any>(this.url + '/count')
   }
 
   private handleError<T>(operation: any, result?: T) {
