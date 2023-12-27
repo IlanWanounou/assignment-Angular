@@ -1,14 +1,44 @@
 import { Injectable } from '@angular/core';
-import { User } from './user.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  loggedIn = false;
-  isAdminUser = false;
+  private HttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      //'x-access-token': this.getToken()!,
+    }),
+  };
 
-  logInUser() {
+  constructor(private http: HttpClient) {}
+
+  url = 'http://localhost:8010/api/user';
+
+  logIn(data: any): Observable<any> {
+    return this.http.post<any>(this.url, data, this.HttpOptions);
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  clearToken() {
+    localStorage.removeItem('token');
+  }
+
+  isAdmin() : Observable<any> {
+    return this.http.get<any>(this.url + '/isAdmin', this.HttpOptions);
+  }
+
+  /*logInUser() {
     this.isAdminUser = false;
     this.loggedIn = true;
   }
@@ -22,20 +52,6 @@ export class AuthService {
     this.isAdminUser = false;
     this.loggedIn = false;
   }
-  
-  users:User[] = [
-    {
-      nom:"admin",
-      password:"admin",
-      isAdmin:true
-    },
-    {
-      nom:"user",
-      password:"user",
-      isAdmin:false
-    }
-  ];
-
 
   isLogged() {
     const isUserLogged = new Promise(
@@ -46,14 +62,8 @@ export class AuthService {
     return isUserLogged;
   }
 
-  isAdmin() {
-    const isAdmin = new Promise(
-      (resolve, reject) => {
-        resolve(this.isAdminUser);
-      }
-    );
-    return isAdmin;
-  }
+
 
   constructor() { }
+  */
 }

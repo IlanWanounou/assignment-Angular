@@ -14,24 +14,20 @@ export class LoginComponent {
   // pour le formulaire
   user=""
   password=""
-  
+
   onSubmit(event:any) {
     if(!this.user || !this.password) {
       alert("Veuillez saisir un nom et un mot de passe")
       return;
     }
-    
-    const user = this.authService.users.find(
-      (u) => {
-        return u.nom === this.user && u.password === this.password
-      }
-    )
 
-    if(user) {
-      user.isAdmin ? this.authService.logInAdmin() : this.authService.logInUser()
-      this.router.navigate(["/home"])
-    } else {
-      alert("Nom ou mot de passe incorrect")
-    }
+    const user = this.authService.logIn({name: this.user, password: this.password});
+    user.subscribe((user) => {
+      if(user.auth) {
+        this.router.navigate(['/home'])
+        this.authService.setToken(user.token)
+      } else
+        alert("Erreur d'authentification")
+    });
   }
 }

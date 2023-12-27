@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 })
 export class AssignmentDetailComponent {
   assignmentTransmis?: Assignment;
+  isAdmin!: boolean;
 
   constructor(
     private assignmentsService: AssignmentsService,
@@ -21,6 +22,12 @@ export class AssignmentDetailComponent {
 
   ngOnInit(): void {
     this.getAssignment();
+    this.authService
+      .isAdmin()
+      .toPromise()
+      .then((data) => {
+        this.isAdmin = data.isAdmin;
+      });
   }
 
   getAssignment(): void {
@@ -52,9 +59,5 @@ export class AssignmentDetailComponent {
         });
       this.router.navigate(['/home']);
     }
-  }
-
-  isAdmin() {
-    return this.authService.isAdminUser;
   }
 }
