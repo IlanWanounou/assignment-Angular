@@ -13,12 +13,6 @@ export class AuthService {
       'x-access-token': this.getToken()!,
     }),
   };
-  private HttpOptionsAdmin = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-access-token': this.getToken()!,
-    }),
-  };
 
   constructor(private http: HttpClient) {}
 
@@ -41,10 +35,7 @@ export class AuthService {
   }
 
   isAdmin(): Observable<any> {
-    this.HttpOptionsAdmin.headers.append(
-      'x-access-token',
-      this.getToken()!
-    );
+    this.HttpOptions.headers.append('x-access-token', this.getToken()!);
     return this.http.get<any>(this.url + '/isAdmin', this.HttpOptions);
   }
 
