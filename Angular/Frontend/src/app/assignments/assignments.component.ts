@@ -14,6 +14,8 @@ export class AssignmentsComponent implements OnInit {
   assignmentSelectionne?: Assignment;
   assignments: Assignment[] = [];
   count!: number;
+  filter = 'all';
+  searchTerm = '';
 
   constructor(private assignmentsService: AssignmentsService) {}
 
@@ -72,4 +74,44 @@ export class AssignmentsComponent implements OnInit {
   handlePageEvent(e: PageEvent) {
    this.getData(e.pageIndex+1)
   }
+
+  //crée un filtre pour les assignments rendus
+  getRendus() {
+    return this.assignments.filter((a) => a.rendu);
+  }
+
+  //crée un filtre pour les assignments non rendus
+  getNonRendus() {
+    return this.assignments.filter((a) => !a.rendu);
+  }
+
+  get allCount() {
+    return this.assignments.length;
+  }
+  get rendusCount() {
+    return this.assignments.filter(a => a.rendu).length;
+  }
+  get nonRendusCount() {
+    return this.assignments.filter(a => !a.rendu).length;
+  }
+
+get filteredAssignments() {
+  let assignments;
+  if (this.filter === 'all') {
+    assignments = this.assignments;
+  } else if (this.filter === 'rendus') {
+    assignments = this.assignments.filter(a => a.rendu);
+  } else if (this.filter === 'nonRendus') {
+    assignments = this.assignments.filter(a => !a.rendu);
+  } else {
+    assignments = this.assignments;
+  }
+
+  // Filtrer les assignments en fonction du terme de recherche
+  if (this.searchTerm) {
+    assignments = assignments.filter(a => a.nom.includes(this.searchTerm));
+  }
+  return assignments;
+}
+
 }

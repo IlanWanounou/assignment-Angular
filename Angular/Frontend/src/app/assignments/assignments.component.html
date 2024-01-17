@@ -7,9 +7,23 @@
   </button>
   </a>
   </div>
+
+  <!-- Ajoutez le sélecteur de filtre ici -->
+  <select [(ngModel)]="filter" class="filter-select">
+    <option value="all">Tous ({{allCount}})</option>
+    <option value="rendus">Rendus ({{rendusCount}})</option>
+    <option value="nonRendus">Non Rendus ({{nonRendusCount}})</option>
+  </select>
+
+  <input [(ngModel)]="searchTerm" placeholder="Rechercher un assignment" />
+
+<mat-list *ngFor="let a of filteredAssignments">
+  <!-- Affichez ici les détails de l'assignment -->
+</mat-list>
+
   <h3>Liste des devoirs :</h3>
 
-  <mat-list *ngFor="let a of assignments">
+  <mat-list *ngFor="let a of filteredAssignments">
     <nav><a routerLink="/assignment/{{a.id}}">
     <h3 mat-subheader>{{ a.dateDeRendu | date }}</h3>
     <mat-list-item (click)="assignmentClique(a)">
