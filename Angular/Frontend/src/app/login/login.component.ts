@@ -24,8 +24,8 @@ export class LoginComponent {
     const user = this.authService.logIn({name: this.user, password: this.password});
     user.subscribe((user) => {
       if(user.auth) {
-        this.router.navigate(['/home'])
         this.authService.setToken(user.token)
+        this.router.navigate(['/home'])
       } else
         alert("Erreur d'authentification")
     });

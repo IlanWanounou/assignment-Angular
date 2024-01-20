@@ -30,6 +30,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -61,7 +62,7 @@ const routes: Routes = [
     MatToolbarModule,
     MatButtonModule, MatIconModule, MatDividerModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule, HttpClientModule,
-    FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule, MatSlideToggleModule,
+    FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule,MatSelectModule, MatSlideToggleModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],

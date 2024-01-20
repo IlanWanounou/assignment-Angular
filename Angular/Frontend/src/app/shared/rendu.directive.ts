@@ -7,7 +7,7 @@ export class RenduDirective {
 
   constructor(el:ElementRef) {
     el.nativeElement.style.color = "green";
-    el.nativeElement.style.border="1px solid orange"
+    el.nativeElement.style.fontWeight = "bold";
   }
 
 }

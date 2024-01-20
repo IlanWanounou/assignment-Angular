@@ -1,38 +1,43 @@
 <main class="container">
   <div class="btnAjout">
-  <a routerLink="/add" routerLinkActive="active">
-  <button mat-flat-button color="accent"
-  >
-    Ajouter Assignment
-  </button>
-  </a>
+    <a routerLink="/add" routerLinkActive="active">
+      <button mat-flat-button color="accent">
+        Ajouter Assignment
+      </button>
+    </a>
   </div>
 
-  <!-- Ajoutez le sélecteur de filtre ici -->
-  <select [(ngModel)]="filter" class="filter-select">
-    <option value="all">Tous ({{allCount}})</option>
-    <option value="rendus">Rendus ({{rendusCount}})</option>
-    <option value="nonRendus">Non Rendus ({{nonRendusCount}})</option>
-  </select>
+  <mat-form-field appearance="fill">
+    <mat-label>Filtre</mat-label>
+    <mat-select [(ngModel)]="filter">
+      <mat-option value="all">Tous ({{allCount}})</mat-option>
+      <mat-option value="rendus">Rendus ({{rendusCount}})</mat-option>
+      <mat-option value="nonRendus">Non Rendus ({{nonRendusCount}})</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <input [(ngModel)]="searchTerm" placeholder="Rechercher un assignment" />
+  <mat-form-field appearance="fill">
+    <mat-label>Rechercher un assignment</mat-label>
+    <input matInput [(ngModel)]="searchTerm">
+  </mat-form-field>
 
-<mat-list *ngFor="let a of filteredAssignments">
-  <!-- Affichez ici les détails de l'assignment -->
-</mat-list>
+  <mat-card *ngFor="let a of filteredAssignments">
+    <a routerLink="/assignment/{{a.id}}">
+      <mat-card-header>
+        <mat-card-title>{{ a.dateDeRendu | date }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="a.rendu" appRendu>{{ a.nom }} a été RENDU.</p>
+        <p *ngIf="!a.rendu" appNonRendu>{{ a.nom }}, N'A PAS ÉTÉ RENDU.</p>
+        <p>{{ a.nom }}</p>
+        <p>Votrre note est de {{ a.note }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>Actions</button>
+      </mat-card-actions>
+    </a>
+  </mat-card>
 
-  <h3>Liste des devoirs :</h3>
-
-  <mat-list *ngFor="let a of filteredAssignments">
-    <nav><a routerLink="/assignment/{{a.id}}">
-    <h3 mat-subheader>{{ a.dateDeRendu | date }}</h3>
-    <mat-list-item (click)="assignmentClique(a)">
-      <p *ngIf="a.rendu" appRendu>{{ a.nom }} a été RENDU.</p>
-      <p *ngIf="!a.rendu" appNonRendu>{{ a.nom }}, N'A PAS ETE RENDU.</p>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </a></nav>
-  </mat-list>
-   <mat-paginator [length]="this.count" [pageSizeOptions]="[this.limit]"   [showFirstLastButtons]="true" (page)="handlePageEvent($event)" aria-label="Select page">
-    </mat-paginator>
+  <mat-paginator [length]="this.count" [pageSizeOptions]="[this.limit]" [showFirstLastButtons]="true" (page)="handlePageEvent($event)">
+  </mat-paginator>
 </main>

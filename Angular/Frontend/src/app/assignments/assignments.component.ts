@@ -85,6 +85,10 @@ export class AssignmentsComponent implements OnInit {
     return this.assignments.filter((a) => !a.rendu);
   }
 
+  getNote(){
+    return this.assignments.filter((a) => a.note);
+  }
+
   get allCount() {
     return this.assignments.length;
   }

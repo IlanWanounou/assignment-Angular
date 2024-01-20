@@ -1,34 +1,129 @@
-
-table tr td {
-  border: 1px solid black;
+/* Reset de base pour les éléments de la page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; /* Utilisez une police moderne */
 }
 
-.rendu {
-  color:green;
+/* Utilisation de variables CSS pour le thème de couleur */
+/* Variables de couleur pour une gestion cohérente des thèmes */
+:root {
+  --bleu-modern: #2c3e50; /* Un bleu moderne et élégant */
+  --noir: #333; /* Un noir qui n'est pas trop dur */
+  --blanc: #fff;
+  --gris-clair: #ecf0f1;
+  --bleu-clair: #daeaf6; /* Bleu clair pastel pour les arrière-plans */
+  --gris: #f5f7fa; /* Gris très clair pour l'arrière-plan général */
+  --ombre: rgba(102, 123, 153, 0.1); /* Ombre douce pour la profondeur */
+  --bordure: rgba(102, 123, 153, 0.3); /* Couleur de bordure subtile */
 }
 
-.nonRendu {
-  color:red;
-  border:2px dashed red;
-  background-color:yellow;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: blueviolet;
+  color: var(--bleu-modern);
+  margin: 0;
+  padding: 0;
 }
 
-
-#monParagraphe {
-  color:pink
-}
-
+/* Mise en page générale */
 .container {
-  display:flex;
+  display: flex;
   flex-direction: column;
+  margin: auto;
+  max-width: 1000px; /* Adapter selon la largeur souhaitée */
+  padding: 20px;
 }
 
-.btnAjout {
-  align-self: flex-end;
+/* En-tête avec une ombre pour la profondeur */
+mat-toolbar {
+  background-color: var(--bleu-modern);
+  color: var(--blanc);
+  box-shadow: 0 2px 5px var(--ombre);
 }
 
+/* Bouton Ajouter avec un style moderne */
+button.mat-flat-button {
+  background-color: var(--bleu-modern);
+  color: var(--blanc);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.mat-flat-button:hover {
+  background-color: #3a506b; /* Un bleu un peu plus clair au survol */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--ombre);
+}
+
+/* Styles pour la barre de recherche */
+.search-container {
+  display: flex;
+  justify-content: space-between; /* Ajustement de l'espacement entre les éléments */
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-container input {
+  width: 100%; /* Pleine largeur */
+  padding: 10px;
+  margin-right: 10px; /* Espacement entre la recherche et le filtre */
+  border-radius: 20px;
+  border: 1px solid var(--bleu-modern);
+  background-color: var(--blanc);
+  border: 1px solid var(--bordure);
+}
+
+/* Styles pour les cartes d'assignment */
+mat-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px var(--ombre);
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+mat-card:hover {
+  box-shadow: 0 6px 12px var(--ombre);
+}
+
+mat-card-header {
+  background-color: var(--bleu-modern);
+  color: var(--blanc);
+  border-radius: 10px 10px 0 0;
+  padding: 15px;
+}
+
+/* Pagination au centre et modernisée */
 .mat-paginator {
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 20px;
+}
+
+/* Corrections pour l'erreur NG0100 si elle est toujours présente */
+select.filter-select.ng-dirty {
+  color: var(--noir);
+}
+
+hr, .mat-divider {
+  border-color: var(--bordure);
+}
+
+.mat-form-field-appearance-fill .mat-form-field-infix {
+  padding: 0;
+  background-color: transparent;
+}
+
+.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+  cursor: pointer;
+  background-color: snow;
+}
+
+::ng-deep .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+  
+  background-color: snow;
 }

@@ -2,24 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private HttpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-access-token': this.getToken()!,
-    }),
-  };
-
   constructor(private http: HttpClient) {}
 
-  url = 'http://localhost:8010/api/user';
+  private url = 'http://localhost:8010/api/user';
 
   logIn(data: any): Observable<any> {
-    return this.http.post<any>(this.url, data, this.HttpOptions);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': this.getToken() || '', // Utilisez un string vide si getToken est null
+    });
+    return this.http.post<any>(this.url, data, { headers });
   }
 
   setToken(token: string) {
@@ -35,9 +31,17 @@ export class AuthService {
   }
 
   isAdmin(): Observable<any> {
-    this.HttpOptions.headers.append('x-access-token', this.getToken()!);
-    return this.http.get<any>(this.url + '/isAdmin', this.HttpOptions);
+    // Construisez les en-têtes à chaque fois pour assurer qu'ils sont à jour
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': this.getToken() || '', // Utilisez un string vide si getToken est null
+    });
+    return this.http.get<any>(this.url + '/isAdmin', { headers });
   }
+
+  // Les autres méthodes sont commentées pour l'instant
+}
+
 
   /*logInUser() {
     this.isAdminUser = false;
@@ -67,4 +71,4 @@ export class AuthService {
 
   constructor() { }
   */
-}
+
