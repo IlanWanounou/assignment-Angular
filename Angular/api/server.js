@@ -70,6 +70,7 @@ app.route(prefix + "/user/isAdmin")
 app.route(prefix + '/user')
   .post(user.postUser);
 
+assignment.initDb();
 
 
 

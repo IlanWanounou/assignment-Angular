@@ -1,5 +1,6 @@
-const assignment = require('../model/assignment');
-let Assignment = require('../model/assignment');
+const assignment = require("../model/assignment");
+let Assignment = require("../model/assignment");
+let Matiere = require("../model/matiere");
 
 // Récupérer tous les assignments (GET)
 function getAssignments(req, res){
@@ -19,18 +20,25 @@ function getAssignments(req, res){
 }
 
 // Récupérer un assignment par son id (GET)
-function getAssignment(req, res){
-    let assignmentId = req.params.id;
+function getAssignment(req, res) {
+  let assignmentId = req.params.id;
 
-    Assignment.findOne({id: assignmentId}, (err, assignment) =>{
-        if(err){res.send(err)}
-        res.json(assignment);
-    })
+  Assignment.findOne({ id: assignmentId }, (err, assignment) => {
+    if (err) {
+      res.send(err);
+    }
+    Matiere.populate(assignment, { path: "matiere" }, (err, assignment) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(assignment);
+    });
+  });
 }
 
 // Ajout d'un assignment (POST)
-function postAssignment(req, res){
-    let assignment = new Assignment();
+function postAssignment(req, res) {
+  let assignment = new Assignment();
     assignment.id = Math.floor(Math.random()*1000)
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
@@ -82,9 +90,39 @@ function getAssignmentsCount(req, res) {
         }
         res.json({count});
     })
+  }
 
+function initDb() {
+  Assignment.count({}, (err, count) => {
+    if (err) {
+      console.log("error: ", err);
+    }
+    if (count === 0) {
+      var assignments = require("../utils/data.json");
+
+      assignments = assignments.map((assignment) => {
+        assignment.dateDeRendu = assignment.dateDeRendu.replace(/"/g, "");
+        assignment.dateDeRendu = Date(assignment.dateDeRendu);
+        assignment.note = null;
+        return assignment;
+      });
+
+      Assignment.insertMany(assignments, (err, insertedAssignments) => {
+        if (err) {
+          console.log("error: ", err);
+        }
+        console.log("assignments added: ", insertedAssignments);
+      });
+    }
+  });
 }
 
-
-
-module.exports = { getAssignments, postAssignment, getAssignment, updateAssignment, deleteAssignment, getAssignmentsCount };
+module.exports = {
+  getAssignments,
+  postAssignment,
+  getAssignment,
+  updateAssignment,
+  deleteAssignment,
+  getAssignmentsCount,
+  initDb,
+};
