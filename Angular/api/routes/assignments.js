@@ -3,21 +3,32 @@ let Assignment = require("../model/assignment");
 let Matiere = require("../model/matiere");
 
 // Récupérer tous les assignments (GET)
-function getAssignments(req, res){
-    var aggregateQuery = Assignment.aggregate();
-    Assignment.aggregatePaginate(
-        aggregateQuery,
-        {
-        page: parseInt(req.query.page) || 1,
-        limit: parseInt(req.query.limit) || 10,
-        }, (err, assignments) => {
-            if (err) {
-                res.send(err)
-            }
-            res.send(assignments)
-        }
-    )
-}
+const getAssignments = (req, res) => {
+  const aggregateQuery = Assignment.aggregate();
+  if (req.query.search) {
+    aggregateQuery.match({
+      $or: [
+        { nom: { $regex: new RegExp(req.query.search, "i") } },
+  
+      ],
+    });
+  }
+
+  Assignment.aggregatePaginate(
+    aggregateQuery,
+    {
+      page: parseInt(req.query.page) || 1,
+      limit: parseInt(req.query.limit) || 10,
+    },
+    (err, assignments) => {
+      if (err) {
+        res.send(err);
+      }
+      res.send(assignments);
+    }
+  );
+};
+
 
 // Récupérer un assignment par son id (GET)
 function getAssignment(req, res) {
@@ -103,7 +114,11 @@ function initDb() {
       assignments = assignments.map((assignment) => {
         assignment.dateDeRendu = assignment.dateDeRendu.replace(/"/g, "");
         assignment.dateDeRendu = Date(assignment.dateDeRendu);
-        assignment.note = null;
+        if (assignment.rendu) {
+          assignment.note = Math.floor(Math.random() * 20);
+        } else {
+          assignment.note = null;
+        }
         return assignment;
       });
 

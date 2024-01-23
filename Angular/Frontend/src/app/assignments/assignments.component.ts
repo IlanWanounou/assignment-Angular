@@ -10,7 +10,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class AssignmentsComponent implements OnInit {
   page: number = 1;
-  limit: number = 10;
+  limit: number = 20;
   assignmentSelectionne?: Assignment;
   assignments: Assignment[] = [];
   count!: number;
@@ -20,17 +20,19 @@ export class AssignmentsComponent implements OnInit {
   constructor(private assignmentsService: AssignmentsService) {}
 
   ngOnInit() {
+     this.getData(this.page);
     this.assignmentsService.getAssignmentCount().subscribe((count) => {
       this.count = count.count;
     });
     // this.peuplerBD();
-    this.getData(this.page);
+
   }
-  getData(page:number) {
+  getData(page: number) {
     this.assignmentsService
-      .getAssignmentsPagine(page, this.limit)
+      .getAssignmentsPagine(page, this.limit, {search: this.searchTerm})
       .subscribe((data) => {
         (this.assignments = data.docs),
+        this.count = data.totalDocs;
         console.log('data reçu');
       });
   }
@@ -72,7 +74,7 @@ export class AssignmentsComponent implements OnInit {
   }
 
   handlePageEvent(e: PageEvent) {
-   this.getData(e.pageIndex+1)
+    this.getData(e.pageIndex + 1);
   }
 
   //crée un filtre pour les assignments rendus
@@ -85,7 +87,7 @@ export class AssignmentsComponent implements OnInit {
     return this.assignments.filter((a) => !a.rendu);
   }
 
-  getNote(){
+  getNote() {
     return this.assignments.filter((a) => a.note);
   }
 
@@ -93,29 +95,24 @@ export class AssignmentsComponent implements OnInit {
     return this.assignments.length;
   }
   get rendusCount() {
-    return this.assignments.filter(a => a.rendu).length;
+    return this.assignments.filter((a) => a.rendu).length;
   }
   get nonRendusCount() {
-    return this.assignments.filter(a => !a.rendu).length;
+    return this.assignments.filter((a) => !a.rendu).length;
   }
 
-get filteredAssignments() {
-  let assignments;
-  if (this.filter === 'all') {
-    assignments = this.assignments;
-  } else if (this.filter === 'rendus') {
-    assignments = this.assignments.filter(a => a.rendu);
-  } else if (this.filter === 'nonRendus') {
-    assignments = this.assignments.filter(a => !a.rendu);
-  } else {
-    assignments = this.assignments;
+  get filteredAssignments() {
+    let assignments;
+    if (this.filter === 'all') {
+      assignments = this.assignments;
+    } else if (this.filter === 'rendus') {
+      assignments = this.assignments.filter((a) => a.rendu);
+    } else if (this.filter === 'nonRendus') {
+      assignments = this.assignments.filter((a) => !a.rendu);
+    } else {
+      assignments = this.assignments;
+    }
+    return assignments;
   }
-
-  // Filtrer les assignments en fonction du terme de recherche
-  if (this.searchTerm) {
-    assignments = assignments.filter(a => a.nom.includes(this.searchTerm));
-  }
-  return assignments;
-}
 
 }

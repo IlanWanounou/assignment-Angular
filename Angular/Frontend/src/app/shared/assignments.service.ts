@@ -3,7 +3,7 @@ import { Assignment } from '../assignments/assignment.model';
 import { Observable, forkJoin } from 'rxjs';
 import { of } from 'rxjs';
 import { LoggingService } from './logging.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators'
 import {data} from "./data"
 
@@ -26,8 +26,24 @@ export class AssignmentsService {
   getAssignments(): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.url);
   }
-  getAssignmentsPagine(page: number, limit: number): Observable<any> {
-    return this.http.get<any>(this.url + '?page=' + page + '&limit=' + limit);
+  getAssignmentsPagine(
+    page: number,
+    limit: number,
+    options: { [key: string]: any }
+  ): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    if (options) {
+      for (const key in options) {
+        if (options.hasOwnProperty(key)) {
+          params = params.set(key, options[key]);
+        }
+      }
+    }
+
+    return this.http.get<any>(this.url, { params: params });
   }
 
   addAssignment(assignment: Assignment): Observable<any> {
@@ -59,8 +75,8 @@ export class AssignmentsService {
     );
   }
 
-  getAssignmentCount() :Observable <any> {
-    return this.http.get<any>(this.url + '/count')
+  getAssignmentCount(): Observable<any> {
+    return this.http.get<any>(this.url + '/count');
   }
 
   private handleError<T>(operation: any, result?: T) {
@@ -69,6 +85,10 @@ export class AssignmentsService {
       console.log(operation + 'a échoué ' + error.message);
       return of(result as T);
     };
+  }
+
+  searchAssignments(term: string) {
+    return this.http.get<Assignment[]>(this.url + '/search/' + term);
   }
 
   peuplerBDavecForkJoin(): Observable<any> {

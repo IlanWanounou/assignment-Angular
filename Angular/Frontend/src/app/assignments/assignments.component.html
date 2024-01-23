@@ -18,7 +18,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Rechercher un assignment</mat-label>
-    <input matInput [(ngModel)]="searchTerm">
+    <input matInput [(ngModel)]="searchTerm" (input)="getData(1)">
   </mat-form-field>
 
   <mat-card *ngFor="let a of filteredAssignments">
