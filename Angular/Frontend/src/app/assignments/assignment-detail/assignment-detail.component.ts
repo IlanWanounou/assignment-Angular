@@ -60,4 +60,25 @@ export class AssignmentDetailComponent {
       this.router.navigate(['/home']);
     }
   }
+
+  getNom(): string {
+    if (this.assignmentTransmis) {
+      return this.assignmentTransmis.nom;
+    }
+    return '';
+  }
+
+  getNote(): number {
+    if (this.assignmentTransmis) {
+      return this.assignmentTransmis.note;
+    }
+    return 0;
+  }
+
+  getRemarques(): string {
+    if (this.assignmentTransmis) {
+      return this.assignmentTransmis.remarques;
+    }
+    return '';
+  }
 }

@@ -28,12 +28,13 @@ body {
 }
 
 /* Mise en page générale */
-.container {
+main.container {
   display: flex;
   flex-direction: column;
   margin: auto;
   max-width: 1000px; /* Adapter selon la largeur souhaitée */
   padding: 20px;
+  background: #f2fdf9;
 }
 
 /* En-tête avec une ombre pour la profondeur */
@@ -124,6 +125,9 @@ hr, .mat-divider {
 }
 
 ::ng-deep .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
-  
   background-color: snow;
+}
+
+::ng-deep.mat-drawer-container {
+  background: linear-gradient(#55e4bb, #5390D9);
 }

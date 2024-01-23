@@ -7,6 +7,8 @@
            placeholder="Nom user"
            [(ngModel)]="user"
            name="Nom user"
+           type="text"
+           class="input"
     />
   </mat-form-field>
 
@@ -16,8 +18,14 @@
            placeholder="Mot de passe"
            [(ngModel)]="password"
            name="Mot de passe"
+           type="password"
+           class="input"            
     />
   </mat-form-field>
 
-  <button mat-raised-button color="primary">Connexion</button>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  
+  <button mat-raised-button color="primary" type="submit">Connexion</button>
 </form>
