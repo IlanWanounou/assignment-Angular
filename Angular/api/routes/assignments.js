@@ -24,7 +24,16 @@ const getAssignments = (req, res) => {
       if (err) {
         res.send(err);
       }
-      res.send(assignments);
+      Matiere.populate(
+        assignments.docs,
+        { path: "matiere" },
+        (err, assignments) => {
+          if (err) {
+            res.send(err);
+          }
+          res.send(assignments);
+        }
+      );
     }
   );
 };
