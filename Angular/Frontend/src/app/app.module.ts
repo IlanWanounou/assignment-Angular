@@ -31,6 +31,9 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatStepperModule } from '@angular/material/stepper'
 
 
 const routes: Routes = [
@@ -60,6 +63,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatMenuModule,
     MatToolbarModule,
+    MatStepperModule,
+    MatTableModule, MatSortModule,
     MatButtonModule, MatIconModule, MatDividerModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule, HttpClientModule,
     FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule,MatSelectModule, MatSlideToggleModule,

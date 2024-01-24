@@ -6,5 +6,10 @@ export class Assignment {
   rendu!:boolean
   note!:number
   remarques!:string
-  matiere!:string
+  matiere!:{
+    name:string,
+    photoProf:string
+    photoMatiere :string
+  }
+  auteur!:string
 }

@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Assignment } from './assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { PageEvent } from '@angular/material/paginator';
+import { ChangeDetectorRef } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-assignments',
@@ -16,17 +19,19 @@ export class AssignmentsComponent implements OnInit {
   count!: number;
   filter = 'all';
   searchTerm = '';
+  
 
-  constructor(private assignmentsService: AssignmentsService) {}
+  constructor(private changeDetectorRef: ChangeDetectorRef, private assignmentsService: AssignmentsService) {}
 
   ngOnInit() {
-     this.getData(this.page);
+    this.getData(this.page);
     this.assignmentsService.getAssignmentCount().subscribe((count) => {
       this.count = count.count;
     });
     // this.peuplerBD();
 
   }
+
   getData(page: number) {
     this.assignmentsService
       .getAssignmentsPagine(page, this.limit, {search: this.searchTerm})
@@ -34,6 +39,7 @@ export class AssignmentsComponent implements OnInit {
         (this.assignments = data.docs),
         this.count = data.totalDocs;
         console.log('data reçu');
+        this.changeDetectorRef.detectChanges();
       });
   }
   peuplerBD() {
@@ -77,22 +83,8 @@ export class AssignmentsComponent implements OnInit {
     this.getData(e.pageIndex + 1);
   }
 
-  //crée un filtre pour les assignments rendus
-  getRendus() {
-    return this.assignments.filter((a) => a.rendu);
-  }
-
-  //crée un filtre pour les assignments non rendus
-  getNonRendus() {
-    return this.assignments.filter((a) => !a.rendu);
-  }
-
-  getNote() {
-    return this.assignments.filter((a) => a.note);
-  }
-
   get allCount() {
-    return this.assignments.length;
+    return this.assignments ? this.assignments.length : 0;
   }
   get rendusCount() {
     return this.assignments.filter((a) => a.rendu).length;

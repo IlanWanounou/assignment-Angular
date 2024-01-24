@@ -131,3 +131,10 @@ hr, .mat-divider {
 ::ng-deep.mat-drawer-container {
   background: linear-gradient(#55e4bb, #5390D9);
 }
+
+.sticky-header .mat-header-row {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f5f5f5; /* Couleur adaptée à ton thème */
+}

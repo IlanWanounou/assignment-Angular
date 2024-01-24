@@ -5,7 +5,17 @@
     <mat-card *ngIf="assignmentTransmis">
       <mat-card-content>
         <mat-card-title>
-          {{ assignmentTransmis.nom }}
+          Auteur : {{ assignmentTransmis.auteur }}
+        </mat-card-title>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="card-container-nom">
+    <mat-card *ngIf="assignmentTransmis">
+      <mat-card-content>
+        <mat-card-title>
+          Nom : {{ assignmentTransmis.nom }}
         </mat-card-title>
       </mat-card-content>
     </mat-card>
@@ -63,11 +73,11 @@
 
   <div class="card-container-matiere">
     <mat-card>
-      <mat-card-content class="card-actions">
-        <nav><a [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']">
-          <button [disabled]="!isAdmin" mat-stroked-button color="primary">Matiere</button>
-        </a></nav>
-        <button [disabled]="!isAdmin" mat-raised-button color="warn" (click)="onDelete(assignmentTransmis)">Delete</button>
+      <mat-card-content>
+        <mat-card-subtitle>
+          <img [src]="'data:image/jpeg;base64,' + assignmentTransmis?.matiere?.photoProf" />
+          {{ assignmentTransmis?.matiere?.name}}
+        </mat-card-subtitle>
       </mat-card-content>
     </mat-card>
   </div>

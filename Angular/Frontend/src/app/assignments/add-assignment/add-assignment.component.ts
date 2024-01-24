@@ -14,6 +14,8 @@ export class AddAssignmentComponent {
   // pour le formulaire
   nomDevoir=""
   dateDeRendu?:Date=undefined;
+  auteur=""
+  remarques=""
 
   onSubmit(event:any) {
     if(!this.nomDevoir || !this.dateDeRendu) {
@@ -23,7 +25,9 @@ export class AddAssignmentComponent {
    const assignment = new Assignment();
     assignment.nom = this.nomDevoir;
     assignment.dateDeRendu = this.dateDeRendu;
-    assignment.rendu = false;
+    assignment.auteur = this.auteur;
+    assignment.remarques = this.remarques;
+
 
     this.assignmentsService.addAssignment(assignment).subscribe(message => {
       console.log(message);
