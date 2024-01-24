@@ -71,12 +71,20 @@
 
   <!-- Add more card containers for other types of information as needed -->
 
+  <!-- Card for the assignment subject -->
   <div class="card-container-matiere">
-    <mat-card>
+    <mat-card *ngIf="assignmentTransmis?.matiere">
       <mat-card-content>
         <mat-card-subtitle>
           <img [src]="'data:image/jpeg;base64,' + assignmentTransmis?.matiere?.photoProf" />
-          {{ assignmentTransmis?.matiere?.name}}
+          Matiere : {{ assignmentTransmis?.matiere?.name}}
+        </mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="!assignmentTransmis?.matiere">
+      <mat-card-content>
+        <mat-card-subtitle>
+          Il n'y a pas de matiere pour ce devoir.
         </mat-card-subtitle>
       </mat-card-content>
     </mat-card>

@@ -28,7 +28,6 @@ export class AddAssignmentComponent {
     assignment.auteur = this.auteur;
     assignment.remarques = this.remarques;
 
-
     this.assignmentsService.addAssignment(assignment).subscribe(message => {
       console.log(message);
       this.router.navigate(['/home']);
