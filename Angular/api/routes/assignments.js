@@ -1,4 +1,3 @@
-const assignment = require("../model/assignment");
 let Assignment = require("../model/assignment");
 let Matiere = require("../model/matiere");
 
@@ -48,9 +47,11 @@ function getAssignment(req, res) {
 }
 
 // Ajout d'un assignment (POST)
-function postAssignment(req, res) {
-  let assignment = new Assignment();
-    assignment.id = Math.floor(Math.random()*1000)
+async function postAssignment(req, res) {
+    // MongoDB doest not auto increment the id field like SQL database, so we have to do it manually.
+    let assignment = new Assignment();
+    const count = await Assignment.countDocuments({});
+    assignment.id = count + 1;
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
     assignment.rendu = req.body.rendu;
