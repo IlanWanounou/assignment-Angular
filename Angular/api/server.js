@@ -48,6 +48,8 @@ let port = process.env.PORT || 8010;
 // les routes
 const prefix = '/api';
 
+app.use("/uploads", express.static("uploads"));
+
 app.route(prefix + '/assignments')
   .get(assignment.getAssignments);
 

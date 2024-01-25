@@ -3,6 +3,8 @@ import { Assignment } from '../assignment.model';
 import { AssignmentsService } from '../../shared/assignments.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-assignment-detail',
@@ -12,6 +14,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 export class AssignmentDetailComponent {
   assignmentTransmis?: Assignment;
   isAdmin!: boolean;
+  prefix = environment.apiUrlPhoto;
 
   constructor(
     private assignmentsService: AssignmentsService,

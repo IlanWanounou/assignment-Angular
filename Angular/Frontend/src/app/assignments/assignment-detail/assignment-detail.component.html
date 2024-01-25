@@ -76,8 +76,8 @@
     <mat-card *ngIf="assignmentTransmis?.matiere">
       <mat-card-content>
         <mat-card-subtitle>
-          <img [src]="'data:image/jpeg;base64,' + assignmentTransmis?.matiere?.photoProf" />
-          Matiere : {{ assignmentTransmis?.matiere?.name}}
+          <img [src]="this.prefix+assignmentTransmis?.matiere?.photoProf" alt="Photo du professeur de la matiere : {{ assignmentTransmis?.matiere?.name}}" width="150" height="150">
+          Matiere: {{ assignmentTransmis?.matiere?.name }}
         </mat-card-subtitle>
       </mat-card-content>
     </mat-card>
