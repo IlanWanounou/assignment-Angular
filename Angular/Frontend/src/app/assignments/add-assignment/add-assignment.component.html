@@ -34,14 +34,14 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Matière</mat-label>
-    <mat-select [(ngModel)]="selectedSubject" name="subject" (selectionChange)="onMatiereChange($event)">
+    <mat-select [(ngModel)]="selectedSubject" name="subject">
       <mat-option *ngFor="let matiere of subjects" [value]="matiere">
         {{ matiere.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  
-  
+
+
 
 
 

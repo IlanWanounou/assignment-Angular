@@ -28,11 +28,6 @@ export class AddAssignmentComponent {
     });
   }
 
-  onMatiereChange(event: any) {
-    console.log("Matière sélectionnée: ", event.value.name);
-    this.selectedSubject = event.value.name;
-    // Vous pouvez également effectuer d'autres actions ici, si nécessaire
-  }
 
   onSubmit(event:any) {
     if(!this.nomDevoir || !this.dateDeRendu) {
@@ -44,8 +39,7 @@ export class AddAssignmentComponent {
     assignment.dateDeRendu = this.dateDeRendu;
     assignment.auteur = this.auteur;
     assignment.remarques = this.remarques;
-    assignment.matiere = this.selectedSubject;
-    
+    assignment.matiere = this.selectedSubject._id;
 
     this.assignmentsService.addAssignment(assignment).subscribe(message => {
       console.log(message);
