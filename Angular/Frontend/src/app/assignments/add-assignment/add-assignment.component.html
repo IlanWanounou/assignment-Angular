@@ -28,7 +28,22 @@
            [(ngModel)]="remarques"
            name="remarques"
     />
+    <!-- liste de matiere  -->
+
   </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Matière</mat-label>
+    <mat-select [(ngModel)]="selectedSubject" name="subject" (selectionChange)="onMatiereChange($event)">
+      <mat-option *ngFor="let matiere of subjects" [value]="matiere">
+        {{ matiere.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  
+
+
 
 
   <mat-form-field>

@@ -57,6 +57,8 @@ async function postAssignment(req, res) {
     assignment.rendu = req.body.rendu;
     assignment.auteur = req.body.auteur;
     assignment.remarques = req.body.remarques;
+    assignment.matiere = req.body.matiere;
+    console.log("POST assignment reçu :" + req.body.matiere);
 
     console.log("POST assignment reçu :");
     console.log(assignment)

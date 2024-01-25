@@ -25,6 +25,7 @@ export class AssignmentsComponent implements OnInit {
 
   ngOnInit() {
     this.getData(this.page);
+    
     this.assignmentsService.getAssignmentCount().subscribe((count) => {
       this.count = count.count;
     });
@@ -106,5 +107,6 @@ export class AssignmentsComponent implements OnInit {
     }
     return assignments;
   }
+
 
 }

@@ -2,6 +2,8 @@ import { Component} from '@angular/core';
 import { Assignment } from '../assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import {Router} from '@angular/router';
+import { MatiereService } from 'src/app/shared/matiere.service';
+import { first } from 'rxjs/operators';
 @Component({
   selector: 'app-add-assignment',
   templateUrl: './add-assignment.component.html',
@@ -9,13 +11,28 @@ import {Router} from '@angular/router';
 })
 export class AddAssignmentComponent {
 
-  constructor(private assignmentsService:AssignmentsService, private router: Router) { }
+  constructor(private assignmentsService:AssignmentsService, private router: Router,private matiereService: MatiereService  ) { }
 
   // pour le formulaire
   nomDevoir=""
   dateDeRendu?:Date=undefined;
   auteur=""
   remarques=""
+  subjects: any;
+  selectedSubject: any;
+
+
+  ngOnInit(): void {
+    this.matiereService.getMatieres().subscribe((subject) => {
+      this.subjects = subject;
+    });
+  }
+
+  onMatiereChange(event: any) {
+    console.log("Matière sélectionnée: ", event.value.name);
+    this.selectedSubject = event.value.name;
+    // Vous pouvez également effectuer d'autres actions ici, si nécessaire
+  }
 
   onSubmit(event:any) {
     if(!this.nomDevoir || !this.dateDeRendu) {
@@ -27,10 +44,13 @@ export class AddAssignmentComponent {
     assignment.dateDeRendu = this.dateDeRendu;
     assignment.auteur = this.auteur;
     assignment.remarques = this.remarques;
+    assignment.matiere = this.selectedSubject;
+    
 
     this.assignmentsService.addAssignment(assignment).subscribe(message => {
       console.log(message);
       this.router.navigate(['/home']);
     });
   }
+
 }

@@ -3,6 +3,7 @@ let app = express();
 let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let user = require('./routes/user');
+let matiere = require('./routes/matiere');
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -62,6 +63,9 @@ app.route(prefix + '/assignments')
   .post(assignment.postAssignment)
   .put(assignment.updateAssignment);
   
+
+  app.route(prefix + '/matieres')
+  .get(matiere.getMatieres);
 
 
 app.route(prefix + "/user/isAdmin")
