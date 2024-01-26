@@ -10,7 +10,23 @@
     <button routerLink="/login" mat-icon-button class="example-icon">
       <mat-icon>person</mat-icon>
     </button>
-  </mat-toolbar>
+  <form ngForm (submit)="onSubmit($event)"
+        class="form toolbar-form"
+        style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+
+    <mat-form-field>
+      <mat-label>Nom :</mat-label>
+      <input matInput placeholder="Nom user" [(ngModel)]="user" name="user" type="text" class="input"/>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mot de passe :</mat-label>
+      <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" type="password" class="input"/>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Connexion</button>
+  </form>
+</mat-toolbar>
   <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened">
         <mat-nav-list>
