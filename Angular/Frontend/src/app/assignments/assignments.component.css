@@ -19,20 +19,24 @@
   --bordure: rgba(102, 123, 153, 0.3); /* Couleur de bordure subtile */
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: blueviolet;
-  color: var(--bleu-modern);
-  margin: 0;
-  padding: 0;
+
+.main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  /* max-height: fit-content; */
 }
 
 /* Mise en page générale */
-main.container {
+.container {
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 1000px; /* Adapter selon la largeur souhaitée */
+  width: 1000px;
+  max-height: fit-content;
+  /* max-width: 900px; Adapter selon la largeur souhaitée */
   padding: 20px;
   background: #f2fdf9;
 }
@@ -114,27 +118,18 @@ hr, .mat-divider {
   border-color: var(--bordure);
 }
 
-.mat-form-field-appearance-fill .mat-form-field-infix {
-  padding: 0;
-  background-color: transparent;
-}
-
-.mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
-  cursor: pointer;
-  background-color: snow;
-}
-
-::ng-deep .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
-  background-color: snow;
-}
-
-::ng-deep.mat-drawer-container {
-  background: linear-gradient(#55e4bb, #5390D9);
-}
 
 .sticky-header .mat-header-row {
   position: sticky;
   top: 0;
   z-index: 1;
   background-color: #f5f5f5; /* Couleur adaptée à ton thème */
+}
+
+.rendu {
+  background-color: rgba(144, 248, 144, 0.521);
+}
+
+.non-rendu {
+  background-color: rgba(252, 153, 153, 0.534);
 }

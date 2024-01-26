@@ -55,7 +55,9 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="['dateDeRendu', 'nom', 'statut', 'note']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['dateDeRendu', 'nom', 'statut', 'note'];"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['dateDeRendu', 'nom', 'statut', 'note'];" 
+    [ngClass]="{'rendu': row.rendu, 'non-rendu': !row.rendu}">
+</tr>
   </table>
 
   <mat-paginator [length]="this.count" [pageSizeOptions]="[this.limit]" [showFirstLastButtons]="true" (page)="handlePageEvent($event)">

@@ -66,6 +66,4 @@ form {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
   }
   
-  ::ng-deep mat-sidenav-content {
-    background: linear-gradient(#55e4bb, #5390D9);
-  }
+ 

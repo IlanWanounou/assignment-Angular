@@ -1,3 +1,4 @@
+<div class="Ajout de devoir">
 <form ngForm (submit)="onSubmit($event);assignmentForm.reset();"
      #assignmentForm
      class="form"
@@ -41,11 +42,6 @@
     </mat-select>
   </mat-form-field>
 
-
-
-
-
-
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
     <input matInput [matDatepicker]="picker"
@@ -58,3 +54,4 @@
   </mat-form-field>
   <button  mat-raised-button color="primary">Ajouter devoir</button>
 </form>
+</div>
