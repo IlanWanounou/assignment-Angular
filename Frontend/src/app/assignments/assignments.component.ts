@@ -19,13 +19,11 @@ export class AssignmentsComponent implements OnInit {
   count!: number;
   filter = 'all';
   searchTerm = '';
-  
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private assignmentsService: AssignmentsService) {}
 
   ngOnInit() {
     this.getData(this.page);
-    
     this.assignmentsService.getAssignmentCount().subscribe((count) => {
       this.count = count.count;
     });
@@ -81,6 +79,8 @@ export class AssignmentsComponent implements OnInit {
   }
 
   handlePageEvent(e: PageEvent) {
+    this.limit = e.pageSize;
+
     this.getData(e.pageIndex + 1);
   }
 

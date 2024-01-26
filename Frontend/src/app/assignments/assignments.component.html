@@ -22,7 +22,7 @@
   </mat-form-field>
 
   <table mat-table [dataSource]="filteredAssignments" matSort class="sticky-header">
-      
+
     <!-- Colonne Date de Rendu -->
     <ng-container matColumnDef="dateDeRendu">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de Rendu </th>
@@ -30,7 +30,7 @@
         <a [routerLink]="['/assignment', element.id]">{{ element.dateDeRendu | date }}</a>
       </td>
     </ng-container>
-    
+
     <ng-container matColumnDef="nom">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
       <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
@@ -55,11 +55,11 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="['dateDeRendu', 'nom', 'statut', 'note']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['dateDeRendu', 'nom', 'statut', 'note'];" 
+    <tr mat-row *matRowDef="let row; columns: ['dateDeRendu', 'nom', 'statut', 'note'];"
     [ngClass]="{'rendu': row.rendu, 'non-rendu': !row.rendu}">
 </tr>
   </table>
-
-  <mat-paginator [length]="this.count" [pageSizeOptions]="[this.limit]" [showFirstLastButtons]="true" (page)="handlePageEvent($event)">
+  <mat-paginator [length]="count" [pageSize]="limit" [pageSizeOptions]="[5,10, 20, 50, 100]" [showFirstLastButtons]="true" (page)="handlePageEvent($event)">
   </mat-paginator>
+
 </main>

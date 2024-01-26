@@ -12,8 +12,10 @@ const getAssignments = (req, res) => {
       ],
     });
   }
+    aggregateQuery.sort({ dateDeRendu: -1 });
 
-  Assignment.aggregatePaginate(
+
+    Assignment.aggregatePaginate(
     aggregateQuery,
     {
       page: parseInt(req.query.page) || 1,

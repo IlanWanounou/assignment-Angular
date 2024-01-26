@@ -27,7 +27,6 @@ import {RouterModule} from '@angular/router';
 import { EditAssignmentComponent } from './edit-assignment/edit-assignment.component';
 import { AuthGuardAdmin, AuthGuardLogged } from './shared/auth.guard';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
@@ -38,7 +37,6 @@ import { MatStepperModule } from '@angular/material/stepper'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent},
   { path: 'home', component: AssignmentsComponent },
   { path: 'add', component: AddAssignmentComponent },
   { path: 'assignment/:id', component: AssignmentDetailComponent,  canActivate:[AuthGuardLogged] },
@@ -55,7 +53,6 @@ const routes: Routes = [
     AddAssignmentComponent,
     AssignmentDetailComponent,
     EditAssignmentComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,

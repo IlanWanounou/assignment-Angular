@@ -11,11 +11,13 @@ export class AppComponent {
   title = 'Application de gestion de devoirs à rendre (Assignments)';
   opened = false;
 
-  constructor  (private authService: AuthService, private router:Router) {}
+  constructor  (private authService: AuthService, private router:Router) {
+  }
   // pour le formulaire
   user=""
   password=""
   errorMessage: string = '';
+  isLoggedIn = true;
 
   onSubmit(event:any) {
     if(!this.user || !this.password) {
@@ -33,6 +35,8 @@ export class AppComponent {
       if(user.auth) {
         this.authService.setToken(user.token);
         this.router.navigate(['/home']);
+        this.isLoggedIn = true;
+        (console.log('Logged in successfully'+ this.isLoggedIn));
       } else {
         this.errorMessage = 'Incorrect login or password. Please try again.';
         console.error('Incorrect login or password');
@@ -43,6 +47,12 @@ export class AppComponent {
         }, 3000);
       }
     });
+  }
+
+  logOut() {
+    this.authService.clearToken();
+    this.router.navigate(['/home']);
+    this.isLoggedIn = false;
   }
 
 }

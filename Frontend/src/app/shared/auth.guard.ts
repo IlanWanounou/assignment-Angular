@@ -8,7 +8,7 @@ export const AuthGuardAdmin: CanActivateFn = (route:any , state: any) => {
   let router = inject(Router);
   if(authService.getToken() == null)   {
     console.log("Vous n'êtes pas connecté ! Navigation refusée ! ")
-    router.navigate(["/login"]) ;
+    router.navigate(["/home"]) ;
     return false;
     } else {
       return authService.isAdmin().toPromise().then((res) => {
@@ -37,7 +37,7 @@ export const AuthGuardAdmin: CanActivateFn = (route:any , state: any) => {
       return true;
       } else {
       console.log ("Vous n'êtes pas connecté ! Navigation refusée ! ")
-      router.navigate(["/login"]) ;
+      router.navigate(["/home"]) ;
       return false;
       }
     }
