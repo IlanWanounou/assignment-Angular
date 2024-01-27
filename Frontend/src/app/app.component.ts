@@ -63,13 +63,7 @@ export class AppComponent {
   }
 
   logOut() {
-    this.authService.clearToken();
-    this.snackBar.open("Déconnexion réussie !", 'OK', {
-      duration: 2000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-    this.router.navigate(['/home']);
+    this.authService.logOut();
     this.isLoggedIn = false;
   }
 

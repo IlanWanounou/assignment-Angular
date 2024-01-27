@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  align-items: center;
+  height: 100vh; /* vh est une unité de mesure relative à la hauteur de la fenêtre de visualisation */
+  flex-direction: column; /* pour centrer le contenu verticalement */
+  font-family: 'Open Sans', sans-serif; /* Police moderne */
+}
+
+
+h1 {
+  color: #333; /* Couleur de texte foncée pour un bon contraste */
+  margin-bottom: 20px; /* Espacement en dessous du titre */
+}
+
+.mat-form-field {
+  width: 100%;
+  max-width: 500px; /* Largeur maximale pour les champs de saisie */
+  margin-bottom: 20px; /* Espacement entre les champs de saisie */
+}
+
+input.matInput {
+  border-radius: 5px; /* Coins arrondis pour les champs de saisie */
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2); /* Ombre pour la profondeur */
+}
+
+button.mat-raised-button {
+  border-radius: 20px; /* Bouton avec coins très arrondis */
+  padding: 10px 20px; /* Padding plus généreux pour le bouton */
+  font-size: 1rem; /* Taille de la police plus grande */
+  transition: background-color 0.3s, transform 0.3s; /* Transition pour effet au survol */
+}
+
+button.mat-raised-button:hover {
+  background-color: #007bff; /* Changement de couleur au survol */
+  transform: translateY(-2px); /* Petit effet de soulèvement au survol */
+}

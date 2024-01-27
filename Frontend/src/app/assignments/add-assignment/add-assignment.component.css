@@ -1,14 +1,32 @@
 .form {
-    display:flex;
-    flex-direction: column;
-    margin:5px;
-    background: linear-gradient(#55e4bb, #5390D9) !important;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 20px;
+  background: #ffffff; /* Fond blanc pour la lisibilité */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Ombre subtile pour le relief */
+  font-family: 'Roboto', sans-serif; /* Police moderne */
+  max-width: 600px; /* Largeur maximale pour la forme */
+  margin: auto; /* Centrer la forme dans la page */
+}
 
-  .ajoutDevoir {
-    display:flex;
-    flex-direction: column;
-    margin:5px;
-  }
+.mat-form-field {
+  margin-bottom: 16px; /* Espace uniforme entre les champs */
+}
 
-  
+input.matInput, .mat-select {
+  border-radius: 4px; /* Coins arrondis pour les champs de saisie et sélection */
+}
+
+button.mat-raised-button {
+  margin-top: 20px; /* Espace au-dessus du bouton */
+  padding: 10px 20px; /* Padding plus généreux pour le bouton */
+  font-size: 1rem; /* Taille de la police plus grande */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Transition pour les effets visuels */
+  border-radius: 20px; /* Coins très arrondis pour le bouton */
+}
+
+button.mat-raised-button:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Ombre plus prononcée au survol */
+}

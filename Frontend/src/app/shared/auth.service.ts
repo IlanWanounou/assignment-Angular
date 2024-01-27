@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  isLoggedIn = false;
+  constructor(private http: HttpClient,  private snackBar: MatSnackBar, private router: Router ) {}
 
   private url = 'http://localhost:8010/api/user';
 
@@ -39,36 +42,16 @@ export class AuthService {
     return this.http.get<any>(this.url + '/isAdmin', { headers });
   }
 
+  logOut() {
+    this.clearToken();
+    this.snackBar.open("Déconnexion réussie !", 'OK', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+    this.router.navigate(['/home']);
+    this.isLoggedIn = false;
+  }
+
   // Les autres méthodes sont commentées pour l'instant
 }
-
-
-  /*logInUser() {
-    this.isAdminUser = false;
-    this.loggedIn = true;
-  }
-
-  logInAdmin() {
-    this.loggedIn = true;
-    this.isAdminUser = true;
-  }
-
-  logOut() {
-    this.isAdminUser = false;
-    this.loggedIn = false;
-  }
-
-  isLogged() {
-    const isUserLogged = new Promise(
-      (resolve, reject) => {
-       resolve(this.loggedIn);
-      }
-    );
-    return isUserLogged;
-  }
-
-
-
-  constructor() { }
-  */
-

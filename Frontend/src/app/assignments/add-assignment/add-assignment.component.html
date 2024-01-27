@@ -1,57 +1,55 @@
-<div class="Ajout de devoir">
-<form ngForm (submit)="onSubmit($event);assignmentForm.reset();"
-     #assignmentForm
-     class="form"
->
-  <mat-form-field>
-    <mat-label> Nom : </mat-label>
-    <input matInput
-           placeholder="Nom du devoir"
-           [(ngModel)]="nomDevoir"
-           name="nom"
-    />
-  </mat-form-field>
+<div class="ajout-devoir">
+  <mat-horizontal-stepper linear #stepper="matHorizontalStepper">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Informations de base</ng-template>
+        <mat-form-field>
+          <mat-label>Nom du devoir</mat-label>
+          <input matInput formControlName="nomDevoir" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Auteur</mat-label>
+          <input matInput formControlName="auteur" required>
+        </mat-form-field>
+        <button mat-button matStepperNext>Suivant</button>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Détails du devoir</ng-template>
+        <mat-form-field>
+          <mat-label>Remarques</mat-label>
+          <input matInput formControlName="remarques" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date de rendu</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateDeRendu" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Matière</mat-label>
+          <mat-select formControlName="selectedSubject">
+            <mat-option *ngFor="let subject of subjects" [value]="subject">
+              {{ subject.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-button matStepperPrevious>Précédent</button>
+        <button mat-button matStepperNext>Suivant</button>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Résumé des informations saisies</ng-template>
+      <h3>Résumé</h3>
+      <p><strong>Nom du devoir :</strong> {{ firstFormGroup.get('nomDevoir')?.value }}</p>
+      <p><strong>Auteur :</strong> {{ firstFormGroup.get('auteur')?.value }}</p>
+      <p><strong>Remarques :</strong> {{ secondFormGroup.get('remarques')?.value }}</p>
+      <p><strong>Date de rendu :</strong> {{ formattedDateDeRendu | date:'fullDate' }}</p>
+      <p><strong>Matière :</strong> {{ getSubjectName(secondFormGroup.get('selectedSubject')?.value) }}</p>
 
- <mat-form-field>
-    <mat-label> auteur : </mat-label>
-    <input matInput
-           placeholder="auteur"
-           [(ngModel)]="auteur"
-           name="auteur"
-    />
-  </mat-form-field>
-
-  <!-- ajouter une remarque -->
-  <mat-form-field>
-    <mat-label> Remarque : </mat-label>
-    <input matInput
-           placeholder="remarques"
-           [(ngModel)]="remarques"
-           name="remarques"
-    />
-    <!-- liste de matiere  -->
-
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Matière</mat-label>
-    <mat-select [(ngModel)]="selectedSubject" name="subject">
-      <mat-option *ngFor="let matiere of subjects" [value]="matiere">
-        {{ matiere.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker"
-          [(ngModel)]="dateDeRendu"
-          name="date"
-    />
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <button  mat-raised-button color="primary">Ajouter devoir</button>
-</form>
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button color="primary" (click)="onSubmit()">Confirmer et envoyer</button>
+    </mat-step>
+  </mat-horizontal-stepper>
 </div>
