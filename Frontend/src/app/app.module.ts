@@ -33,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper'
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 const routes: Routes = [
@@ -65,6 +66,7 @@ const routes: Routes = [
     MatButtonModule, MatIconModule, MatDividerModule, MatPaginatorModule,
     MatCardModule, MatFormFieldModule, MatInputModule, HttpClientModule,
     FormsModule, MatDatepickerModule, MatNativeDateModule, MatCheckboxModule, MatListModule,MatSelectModule, MatSlideToggleModule,
+    MatSnackBarModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],

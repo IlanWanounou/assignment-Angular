@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from './shared/auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,18 @@ export class AppComponent {
   title = 'Application de gestion de devoirs à rendre (Assignments)';
   opened = false;
 
-  constructor  (private authService: AuthService, private router:Router) {
+  constructor  (private authService: AuthService, private router:Router, private snackBar: MatSnackBar) {
   }
   // pour le formulaire
   user=""
   password=""
   errorMessage: string = '';
-  isLoggedIn = true;
+  isLoggedIn = false;
+
+  ngOnInit() : void {
+
+    this.isLoggedIn = true ?  this.authService.getToken() != null : false;
+  }
 
   onSubmit(event:any) {
     if(!this.user || !this.password) {
@@ -34,6 +40,11 @@ export class AppComponent {
     user.subscribe((user) => {
       if(user.auth) {
         this.authService.setToken(user.token);
+        this.snackBar.open("Connexion réussie !", 'OK', {
+          duration: 2000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
         this.router.navigate(['/home']);
         this.isLoggedIn = true;
         (console.log('Logged in successfully'+ this.isLoggedIn));
@@ -46,11 +57,18 @@ export class AppComponent {
           this.errorMessage = '';
         }, 3000);
       }
+      this.user = '';
+      this.password = '';
     });
   }
 
   logOut() {
     this.authService.clearToken();
+    this.snackBar.open("Déconnexion réussie !", 'OK', {
+      duration: 2000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
     this.router.navigate(['/home']);
     this.isLoggedIn = false;
   }
