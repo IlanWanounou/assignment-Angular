@@ -16,6 +16,7 @@ export class AddAssignmentComponent implements OnInit {
   secondFormGroup!: FormGroup;
   subjects: any;
   selectedSubject: any;
+  minDate = new Date();
 
   constructor(
     private assignmentsService:AssignmentsService,
