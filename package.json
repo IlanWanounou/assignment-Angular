@@ -2,7 +2,7 @@
   "name": "assignment-app",
   "version": "0.0.0",
   "scripts": {
-    "prebuild": "cd backend && npm run start",
+    "prebuild": "cd api && npm run start",
     "build": "cd frontend && npm install && npm run build"
   }
 }
