@@ -6,6 +6,7 @@ import { LoggingService } from './logging.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators'
 import {data} from "./data"
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AssignmentsService {
     private http: HttpClient
   ) {}
 
-  url = 'http://localhost:8010/api/assignments';
+  url = environment.apiUrl + '/assignments';
   getAssignments(): Observable<Assignment[]> {
     return this.http.get<Assignment[]>(this.url);
   }

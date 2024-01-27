@@ -20,7 +20,10 @@ export class AssignmentsComponent implements OnInit {
   filter = 'all';
   searchTerm = '';
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private assignmentsService: AssignmentsService) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private assignmentsService: AssignmentsService
+  ) {}
 
   ngOnInit() {
     this.getData(this.page);
@@ -28,15 +31,13 @@ export class AssignmentsComponent implements OnInit {
       this.count = count.count;
     });
     // this.peuplerBD();
-
   }
 
   getData(page: number) {
     this.assignmentsService
-      .getAssignmentsPagine(page, this.limit, {search: this.searchTerm})
+      .getAssignmentsPagine(page, this.limit, { search: this.searchTerm })
       .subscribe((data) => {
-        (this.assignments = data.docs),
-        this.count = data.totalDocs;
+        (this.assignments = data.docs), (this.count = data.totalDocs);
         console.log('data reçu');
         this.changeDetectorRef.detectChanges();
       });

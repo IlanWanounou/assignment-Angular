@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrlPhoto: 'http://localhost:8010/uploads/',
+  apiUrl: 'http://localhost:8010/api',
 };
 
 /*

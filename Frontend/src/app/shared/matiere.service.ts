@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators'
 import {data} from "./data"
 import { Matiere } from './matiere.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class MatiereService {
     private http: HttpClient
   ) {}
 
-  url = 'http://localhost:8010/api/matieres';
+  url = environment.apiUrl + '/matieres/';
 
-  
+
 
   getMatieres(): Observable<any> {
     return this.http.get<any>(this.url);

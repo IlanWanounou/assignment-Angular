@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,7 @@ export class AuthService {
   isLoggedIn = false;
   constructor(private http: HttpClient,  private snackBar: MatSnackBar, private router: Router ) {}
 
-  private url = 'http://localhost:8010/api/user';
-
+  private url = environment.apiUrl + '/users';
   logIn(data: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
