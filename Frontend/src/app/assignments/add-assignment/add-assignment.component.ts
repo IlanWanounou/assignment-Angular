@@ -20,7 +20,7 @@ export class AddAssignmentComponent {
   remarques=""
   subjects: any;
   selectedSubject: any;
-
+  minDate = new Date();
 
   ngOnInit(): void {
     this.matiereService.getMatieres().subscribe((subject) => {
