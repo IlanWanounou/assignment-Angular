@@ -38,6 +38,9 @@ app.use(function (req, res, next) {
   next();
 });
 
+let cors = require('cors');
+app.use(cors());
+
 
 // Pour les formulaires
 app.use(bodyParser.urlencoded({extended: true}));
