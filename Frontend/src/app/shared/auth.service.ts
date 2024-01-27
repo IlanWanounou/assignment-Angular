@@ -12,7 +12,7 @@ export class AuthService {
   isLoggedIn = false;
   constructor(private http: HttpClient,  private snackBar: MatSnackBar, private router: Router ) {}
 
-  private url = environment.apiUrl + '/users';
+  private url = environment.apiUrl + '/user';
   logIn(data: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
