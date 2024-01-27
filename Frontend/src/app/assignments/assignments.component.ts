@@ -4,6 +4,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import {MatTableDataSource} from "@angular/material/table";
 
 
 @Component({
@@ -12,13 +13,16 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./assignments.component.css'],
 })
 export class AssignmentsComponent implements OnInit {
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+
   page: number = 1;
   limit: number = 20;
-  assignmentSelectionne?: Assignment;
-  assignments: Assignment[] = [];
+  assignments!: MatTableDataSource<Assignment>;
   count!: number;
-  filter = 'all';
   searchTerm = '';
+  filteredAssignments: MatTableDataSource<Assignment> | null = null;
+  selectedFilter: 'all' | 'rendus' | 'nonRendus' = 'all';
+  originalAssignments!: MatTableDataSource<Assignment>;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -26,6 +30,7 @@ export class AssignmentsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.assignments = new MatTableDataSource<Assignment>();
     this.getData(this.page);
     this.assignmentsService.getAssignmentCount().subscribe((count) => {
       this.count = count.count;
@@ -34,80 +39,48 @@ export class AssignmentsComponent implements OnInit {
   }
 
   getData(page: number) {
-    this.assignmentsService
-      .getAssignmentsPagine(page, this.limit, { search: this.searchTerm })
-      .subscribe((data) => {
-        (this.assignments = data.docs), (this.count = data.totalDocs);
-        console.log('data reçu');
+    this.assignmentsService.getAssignmentsPagine(page, this.limit, { search: this.searchTerm })
+      .subscribe(data => {
+        const newDataSource = new MatTableDataSource<Assignment>(data.docs);
+        this.originalAssignments = new MatTableDataSource<Assignment>(data.docs);
+        this.assignments.data = newDataSource.data;
+        this.assignments.sort = this.sort;
         this.changeDetectorRef.detectChanges();
       });
   }
-  peuplerBD() {
-    // version naive et simple
-    //this.assignmentsService.peuplerBD();
-
-    // meilleure version :
-    this.assignmentsService.peuplerBDavecForkJoin().subscribe(() => {
-      console.log(
-        'LA BD A ETE PEUPLEE, TOUS LES ASSIGNMENTS AJOUTES, ON RE-AFFICHE LA LISTE'
-      );
-      // replaceUrl = true = force le refresh, même si
-      // on est déjà sur la page d’accueil
-      // Marche plus avec la dernière version d’angular
-      //this.router.navigate(["/home"], {replaceUrl:true});
-      // ceci marche….
-      window.location.reload();
-    });
+  applyFilter() {
+    let filteredData;
+    switch (this.selectedFilter) {
+      case 'rendus':
+        filteredData = this.originalAssignments.data.filter(assignment => assignment.rendu);
+        break;
+      case 'nonRendus':
+        filteredData = this.originalAssignments.data.filter(assignment => !assignment.rendu);
+        break;
+      default:
+        filteredData = this.originalAssignments.data; // Aucun filtre appliqué
+    }
+    this.count = filteredData.length; // Mettre à jour le compte
+    this.assignments = new MatTableDataSource<Assignment>(filteredData);
+    this.changeDetectorRef.detectChanges();
   }
 
-  getDescription() {
-    return 'Je suis un sous composant';
+  countAll(): number {
+    return this.originalAssignments.data.length;
   }
-
-  getColor(a: any) {
-    if (a.rendu) return 'green';
-    else return 'red';
+  countRendus(): number {
+    return this.originalAssignments.data.filter(assignment => assignment.rendu).length;
   }
-
-  assignmentClique(a: Assignment) {
-    this.assignmentSelectionne = a;
+  countNonRendus(): number {
+    return this.originalAssignments.data.filter(assignment => !assignment.rendu).length;
   }
-
-  deleteAssignment(assignment: Assignment) {
-    const index = this.assignments.findIndex((a) => a === assignment);
-    this.assignments.splice(index, 1);
-    this.assignmentSelectionne = undefined;
+  getDataSource() {
+    return this.filteredAssignments || this.assignments;
   }
-
   handlePageEvent(e: PageEvent) {
     this.limit = e.pageSize;
-
     this.getData(e.pageIndex + 1);
+    this.applyFilter();
   }
-
-  get allCount() {
-    return this.assignments ? this.assignments.length : 0;
-  }
-  get rendusCount() {
-    return this.assignments.filter((a) => a.rendu).length;
-  }
-  get nonRendusCount() {
-    return this.assignments.filter((a) => !a.rendu).length;
-  }
-
-  get filteredAssignments() {
-    let assignments;
-    if (this.filter === 'all') {
-      assignments = this.assignments;
-    } else if (this.filter === 'rendus') {
-      assignments = this.assignments.filter((a) => a.rendu);
-    } else if (this.filter === 'nonRendus') {
-      assignments = this.assignments.filter((a) => !a.rendu);
-    } else {
-      assignments = this.assignments;
-    }
-    return assignments;
-  }
-
 
 }

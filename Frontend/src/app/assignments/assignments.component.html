@@ -6,34 +6,34 @@
       </button>
     </a>
   </div>
-
   <mat-form-field appearance="fill">
     <mat-label>Filtre</mat-label>
-    <mat-select [(ngModel)]="filter">
-      <mat-option value="all">Tous ({{allCount}})</mat-option>
-      <mat-option value="rendus">Rendus ({{rendusCount}})</mat-option>
-      <mat-option value="nonRendus">Non Rendus ({{nonRendusCount}})</mat-option>
+    <mat-select [(ngModel)]="selectedFilter" (selectionChange)="applyFilter()">
+      <mat-option value="all">Tous ({{ countAll() }})</mat-option>
+      <mat-option value="rendus">Rendus ({{ countRendus() }})</mat-option>
+      <mat-option value="nonRendus">Non Rendus ({{ countNonRendus() }})</mat-option>
     </mat-select>
   </mat-form-field>
+
 
   <mat-form-field appearance="fill">
     <mat-label>Rechercher un assignment</mat-label>
     <input matInput [(ngModel)]="searchTerm" (input)="getData(1)">
   </mat-form-field>
 
-  <table mat-table [dataSource]="filteredAssignments" matSort class="sticky-header">
+  <table mat-table [dataSource]="getDataSource()" matSort class="sticky-header">
 
     <!-- Colonne Date de Rendu -->
     <ng-container matColumnDef="dateDeRendu">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de Rendu </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header > Date de Rendu </th>
       <td mat-cell *matCellDef="let element">
         <a [routerLink]="['/assignment', element.id]">{{ element.dateDeRendu | date }}</a>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="nom">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
-      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+      <td mat-cell *matCellDef="let element "> {{element.nom}} </td>
     </ng-container>
 
     <!-- <ng-container matColumnDef="matiere">
@@ -42,7 +42,7 @@
     </ng-container> -->
 
     <ng-container matColumnDef="statut">
-      <th mat-header-cell *matHeaderCellDef> Statut </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Statut </th>
       <td mat-cell *matCellDef="let element">
         <span *ngIf="element.rendu" appRendu>RENDU</span>
         <span *ngIf="!element.rendu" appNonRendu>N'A PAS ÉTÉ RENDU</span>
@@ -50,7 +50,7 @@
     </ng-container>
 
     <ng-container matColumnDef="note">
-      <th mat-header-cell *matHeaderCellDef> Note </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Note </th>
       <td mat-cell *matCellDef="let element"> {{element.note}} </td>
     </ng-container>
 
