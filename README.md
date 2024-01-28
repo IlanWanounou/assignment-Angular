@@ -38,11 +38,10 @@
 | user  | user | non  |
 | admin  | admin | oui  |
 
-##Video du Tour du
+## Video du Tour du  site.
 
 https://github.com/IlanWanounou/assignment-Angular/assets/104560729/127a17c6-9853-4eac-82a7-1380ba137d5f
 
- site.
 
 
 
