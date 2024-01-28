@@ -62,7 +62,7 @@
           <!-- Buttons for editing and deleting assignment -->
           <mat-card class="card-container">
             <mat-card-actions>
-              <button mat-stroked-button color="primary" [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']" [disabled]="!isAdmin">Edit</button>
+              <button mat-stroked-button color="primary" [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']">Edit</button>
               <button mat-raised-button color="warn" (click)="onDelete(assignmentTransmis)" [disabled]="!isAdmin">Delete</button>
               <form *ngIf="isAdmin && assignmentTransmis && !assignmentTransmis.rendu">
                 <mat-form-field>

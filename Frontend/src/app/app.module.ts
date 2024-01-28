@@ -42,7 +42,7 @@ const routes: Routes = [
   { path: 'home', component: AssignmentsComponent },
   { path: 'add', component: AddAssignmentComponent, canActivate:[AuthGuardLogged] },
   { path: 'assignment/:id', component: AssignmentDetailComponent,  canActivate:[AuthGuardLogged] },
-  { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuardAdmin] },
+  { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuardLogged] },
  // { path: '**', component: AssignmentsComponent }
 
 ];
