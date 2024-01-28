@@ -46,6 +46,7 @@ export class AssignmentsComponent implements OnInit {
         this.assignments.data = newAssignments.data;
         this.count = data.totalDocs; // Total count from the backend
         this.assignments.sort = this.sort;
+        this.applyFilter();
         this.changeDetectorRef.detectChanges();
       });
   }
@@ -64,11 +65,11 @@ export class AssignmentsComponent implements OnInit {
         break;
     }
     this.assignments = new MatTableDataSource<Assignment>(filteredData);
-    this.count = filteredData.length; // Update the count to the length of filtered data
+   // this.count = filteredData.length; // Update the count to the length of filtered data
     this.assignments.sort = this.sort;
     this.changeDetectorRef.detectChanges();
     // Reset paginator to the first page when the filter changes
-    this.count = this.originalAssignments.data.length;
+   // this.count = this.originalAssignments.data.length;
   }
 
 
@@ -93,5 +94,4 @@ export class AssignmentsComponent implements OnInit {
     // Fetch new data with the updated page and limit
     this.getData(this.page);
   }
-  
 }
