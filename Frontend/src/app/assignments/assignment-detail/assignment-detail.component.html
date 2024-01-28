@@ -1,104 +1,78 @@
-<div class="dashboard-container">
 
-  <!-- Card for the assignment name -->
-  <div class="card-container-nom">
-    <mat-card *ngIf="assignmentTransmis">
-      <mat-card-content>
-        <mat-card-title>
-          Auteur : {{ assignmentTransmis.auteur }}
-        </mat-card-title>
-      </mat-card-content>
-    </mat-card>
-  </div>
+<div class="center-div">
+  <mat-card class="card-container">
+    <mat-card-content>
+      <mat-card-subtitle>
+        <div class="dashboard-container">
+          <!-- Card for the author and assignment name -->
+          <mat-card class="card-container">
+            <mat-card-content>
+              <mat-card-title>
+                Auteur : {{ assignmentTransmis?.auteur }}
+              </mat-card-title>
+              <mat-card-subtitle>
+                Nom : {{ assignmentTransmis?.nom }}
+              </mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
 
-  <div class="card-container-nom">
-    <mat-card *ngIf="assignmentTransmis">
-      <mat-card-content>
-        <mat-card-title>
-          Nom : {{ assignmentTransmis.nom }}
-        </mat-card-title>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          <!-- Card for the assignment due date and status -->
+          <mat-card class="card-container">
+            <mat-card-content>
+              <mat-card-subtitle>
+                Due: {{ assignmentTransmis?.dateDeRendu | date: 'dd/MM/yyyy' }}
+              </mat-card-subtitle>
+              <mat-card-subtitle>
+                Status: {{ assignmentTransmis?.rendu ? 'Submitted' : 'Not Submitted' }}
+              </mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
 
-  <!-- Card for the assignment due date and status -->
-  <div class="card-container-date">
-    <mat-card *ngIf="assignmentTransmis">
-      <mat-card-content>
-        <mat-card-subtitle>
-          Due: {{ assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy' }}
-        </mat-card-subtitle>
-        <mat-card-subtitle>
-          Status: {{ assignmentTransmis.rendu ? 'Submitted' : 'Not Submitted' }}
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          <!-- Card for the assignment note if submitted -->
+          <mat-card class="card-container" *ngIf="assignmentTransmis?.rendu">
+            <mat-card-content>
+              <mat-card-subtitle>
+                Note: {{ assignmentTransmis!.note }}
+              </mat-card-subtitle>
+              <mat-card-subtitle>
+                remarques: {{ assignmentTransmis!.remarques }}
+              </mat-card-subtitle>
+            </mat-card-content>
+          </mat-card>
 
-  <!-- Card for the assignment note if submitted -->
-  <div class="card-container-rendu" *ngIf="assignmentTransmis?.rendu">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-subtitle>
-          Note: {{ assignmentTransmis?.note }}
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          <!-- Card for the assignment subject -->
+          <div class="card-container-matiere">
+            <mat-card *ngIf="assignmentTransmis?.matiere">
+              <mat-card-content>
+                <mat-card-subtitle>
+                  <img [src]="this.prefix+assignmentTransmis?.matiere?.photoProf" alt="Photo du professeur de la matiere : {{ assignmentTransmis?.matiere?.name}}" width="150" height="150">
+                  Matiere: {{ assignmentTransmis?.matiere?.name }}
+                </mat-card-subtitle>
+              </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="!assignmentTransmis?.matiere">
+              <mat-card-content>
+                <mat-card-subtitle>
+                  Il n'y a pas de matiere pour ce devoir.
+                </mat-card-subtitle>
+              </mat-card-content>
+            </mat-card>
+          </div>
 
-  <!-- Card for marking assignment as submitted with a checkbox -->
-  <div class="card-container-mark" *ngIf="!assignmentTransmis?.rendu">
-    <mat-card>
-      <mat-card-content>
-        <mat-checkbox (click)="onAssignmentRendu()">
-          Mark as Submitted
-        </mat-checkbox>
-      </mat-card-content>
-    </mat-card>
-  </div>
+          <!-- Buttons for editing and deleting assignment -->
+          <mat-card class="card-container">
+            <mat-card-actions>
+              <button mat-stroked-button color="primary" [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']" [disabled]="!isAdmin">Edit</button>
+              <button mat-raised-button color="warn" (click)="onDelete(assignmentTransmis)" [disabled]="!isAdmin">Delete</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
 
-  <!-- Buttons for editing and deleting assignment -->
-  <div class="card-container-edit">
-    <mat-card>
-      <mat-card-content class="card-actions">
-        <nav><a [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']">
-          <button [disabled]="!isAdmin" mat-stroked-button color="primary">Edit</button>
-        </a></nav>
-        <button [disabled]="!isAdmin" mat-raised-button color="warn" (click)="onDelete(assignmentTransmis)">Delete</button>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <!-- Add more card containers for other types of information as needed -->
-
-  <!-- Card for the assignment subject -->
-  <div class="card-container-matiere">
-    <mat-card *ngIf="assignmentTransmis?.matiere">
-      <mat-card-content>
-        <mat-card-subtitle>
-          <img [src]="this.prefix+assignmentTransmis?.matiere?.photoProf" alt="Photo du professeur de la matiere : {{ assignmentTransmis?.matiere?.name}}" width="150" height="150">
-          Matiere: {{ assignmentTransmis?.matiere?.name }}
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="!assignmentTransmis?.matiere">
-      <mat-card-content>
-        <mat-card-subtitle>
-          Il n'y a pas de matiere pour ce devoir.
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-   <!-- Card for the assignment note if submitted -->
-  <div class="card-container-rendu" *ngIf="assignmentTransmis?.rendu">
-    <mat-card>
-      <mat-card-content>
-        <mat-card-subtitle>
-          remarques: {{ assignmentTransmis?.remarques }}
-        </mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        Matiere: {{ assignmentTransmis?.matiere?.name }}
+      </mat-card-subtitle>
+    </mat-card-content>
+  </mat-card>
 </div>
+

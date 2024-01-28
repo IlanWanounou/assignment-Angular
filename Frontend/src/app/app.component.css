@@ -38,12 +38,49 @@ section {
     width: 200px;
   }
 
-.toolbar-form {
+/* Color Scheme */
+:root {
+  --light-blue: #e3f2fd; /* Very light blue */
+  --white: #ffffff; /* White */
+  --dark-blue: #1e88e5; /* A darker blue for contrast */
+  --mid-blue: #90caf9; /* A mid-tone blue */
+  --text-color: #1a237e; /* Dark blue text for better readability on light backgrounds */
+}
+/* Assuming .toolbar-form-test is the class for the container of the toolbar */
+.toolbar-form-test .mat-toolbar {
+  background-color: var(--light-blue);
+  color: var(--text-color);
+  justify-content: center;
+}
+
+
+/* Toolbar form styles */
+.toolbar-form-test .toolbar-form {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 10px; /* Creates space between form elements */
 }
 
-.toolbar-form mat-form-field {
+/* Input fields within the toolbar */
+.toolbar-form-test .toolbar-form mat-form-field {
   margin-right: 10px;
 }
+
+/* Specific label styles if needed */
+.toolbar-form-test .toolbar-form .mat-form-field-label {
+  color: var(--dark-blue);
+}
+
+/* Button styles within the toolbar */
+.toolbar-form-test .toolbar-form button[mat-raised-button] {
+  background-color: var(--dark-blue);
+  color: var(--white);
+}
+
+/* Hover effect for buttons */
+.toolbar-form-test .toolbar-form button[mat-raised-button]:hover {
+  background-color: var(--mid-blue);
+}
+
+/* Sidenav styles */

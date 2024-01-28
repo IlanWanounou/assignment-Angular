@@ -1,33 +1,35 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" (click)="opened=!opened">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button routerLink="/home" mat-icon-button class="example-icon home-icon">
-      <mat-icon>home</mat-icon>
-    </button>
-    <button routerLink="/login" mat-icon-button class="example-icon">
-      <mat-icon>person</mat-icon>
-    </button>
-  <form *ngIf="!isLoggedIn" ngForm (submit)="onSubmit($event)"
-        class="form toolbar-form"
-        style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+<div class="toolbar-form-test">
+  <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" (click)="opened=!opened">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>My App</span>
+      <span class="example-spacer"></span>
+      <button routerLink="/home" mat-icon-button class="example-icon home-icon">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button routerLink="/login" mat-icon-button class="example-icon">
+        <mat-icon>person</mat-icon>
+      </button>
+    <form *ngIf="!isLoggedIn" ngForm (submit)="onSubmit($event)"
+          class="form toolbar-form"
+          style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
 
-    <mat-form-field>
-      <mat-label>Nom :</mat-label>
-      <input matInput placeholder="Nom user" [(ngModel)]="user" name="user" type="text" class="input"/>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nom :</mat-label>
+        <input matInput placeholder="Nom user" [(ngModel)]="user" name="user" type="text" class="input"/>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Mot de passe :</mat-label>
-      <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" type="password" class="input"/>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Connexion</button>
+      <mat-form-field>
+        <mat-label>Mot de passe :</mat-label>
+        <input matInput placeholder="Mot de passe" [(ngModel)]="password" name="password" type="password" class="input"/>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Connexion</button>
 
-  </form>
-  <button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logOut()">Déconnexion</button>
+    </form>
+    <button *ngIf="isLoggedIn" mat-raised-button color="primary" (click)="logOut()">Déconnexion</button>
 </mat-toolbar>
+</div>
   <mat-sidenav-container>
     <mat-sidenav [(opened)]="opened">
         <mat-nav-list>

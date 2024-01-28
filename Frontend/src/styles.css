@@ -1,17 +1,13 @@
 html, body { height: auto;
-    background: linear-gradient(#55e4bb, #5390D9) !important; }
+  background: linear-gradient(to right, #add8e6, #ffffff) !important; }
 body { font-family: Roboto, "Helvetica Neue", sans-serif;
-    background: linear-gradient(#55e4bb, #5390D9 )!important; }
+  background: linear-gradient(to right, #add8e6, #ffffff)!important; }
 
 
   mat-sidenav-content.mat-drawer-content.mat-sidenav-content {
     /* display: flex; */
-    background: linear-gradient(#55e4bb, #5390D9) !important;
+    background: radial-gradient(#add8e6, #ffffff) !important;
   }
-
-  /* mat-sidenav-container.mat-drawer-container.mat-sidenav-container {
-    display: flex;
-    justify-content: center;
-    width: 50%;
-    background: linear-gradient(#55e4bb, #5390D9) !important;
-  } */
+body {
+  background: linear-gradient(to right, #add8e6, #ffffff) !important;
+}

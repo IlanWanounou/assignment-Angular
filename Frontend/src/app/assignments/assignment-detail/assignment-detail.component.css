@@ -1,85 +1,77 @@
+:root {
+  --primary-color: #5D93E1; /* Blue */
+  --secondary-color: #FFC107; /* Updated to a golden yellow for better contrast */
+  --background-color: #ecf0f3; /* Light grey */
+  --text-color: #ff1111; /* Dark grey */
+  --card-background-color: #e3dada; /* White */
+  --card-hover-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added variable for hover shadow */
+  --color-dark: #517abc; /* Darker shade of blue */
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: 'Roboto', sans-serif;
+}
+
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three columns layout */
-    grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Updated to gap for better control */
+  padding: 40px;
+  justify-content: center; /* Align items to center */
+  max-width: calc(100% - 80px); /* Assuming 40px padding on each side */
+  margin: 0 auto; /* This will center the .dashboard-container if it's smaller than its parent */
+}
+
+mat-card {
+  box-shadow: var(--card-hover-shadow);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Hover effect */
+mat-card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 0 10px #007bff;
+  color: #007bff;
+}
+
+/* Card content styling */
+mat-card-content {
+  padding: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
     padding: 20px;
-    max-width: 1200px; /* Adjust max width as needed */
-    margin: auto;
   }
-  
-  .card-container-nom,
-  .card-container-date,
-  .card-container-rendu,
-  .card-container-mark,
-  .card-container-edit,
-  .card-container-matiere {
-    margin-bottom: 20px;
-  }
-  
-  mat-card {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 8px; /* Rounded corners for the cards */
-    transition: 0.3s;
-    height: auto; /* Height auto for content adjustment */
-  }
-  
-  /* Hover effect */
-  mat-card:hover {
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Card content styling */
-  mat-card-content {
-    padding: 30px; /* Increased padding for a larger look */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Aligns content to the start of the card */
-  }
-  
-  /* Title and subtitle styling */
-  mat-card-title {
-    font-size: 24px; /* Larger font size for titles */
-    color: #333; /* Dark font for titles */
-    margin-bottom: 20px;
-  }
-  
-  mat-card-subtitle {
-    font-size: 18px; /* Larger font size for subtitles */
-    color: #666; /* Grey font for subtitles */
-    margin-bottom: 15px;
-  }
-  
-  /* Action buttons styling */
-  .card-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%; /* Ensure buttons span the full width of the card */
-    padding-top: 20px; /* Space above actions */
-  }
-  
-  /* Checkbox styling */
-  mat-checkbox {
-    align-self: center; /* Center checkbox horizontally */
-    margin-top: 20px; /* Space above checkbox */
-  }
-  
-  /* Button styling */
-  nav a button, button[mat-raised-button] {
-    margin-top: 10px; /* Space above buttons */
-  }
-  
-  /* Responsive adjustments for a two-column layout on smaller screens */
-  @media (max-width: 1024px) {
-    .dashboard-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  /* Responsive adjustments for a single-column layout on mobile screens */
-  @media (max-width: 768px) {
-    .dashboard-container {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}
+
+/* Additional styles for the buttons and images */
+button {
+  cursor: pointer; /* Added cursor pointer to buttons */
+  transition: background-color 0.3s; /* Smooth background transition for buttons */
+  background: #55e4bb;
+}
+
+button:hover {
+  background-color: var(--color-dark);
+  color: #e70b0b;
+}
+
+img {
+  width: 15%; /* Make images responsive */
+  height: auto;
+  border-radius: 12px; /* Rounded corners for images */
+}
+
+.center-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Add more custom styles as needed */

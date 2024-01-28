@@ -41,13 +41,15 @@ export class AssignmentsComponent implements OnInit {
   getData(page: number) {
     this.assignmentsService.getAssignmentsPagine(page, this.limit, { search: this.searchTerm })
       .subscribe(data => {
-        const newDataSource = new MatTableDataSource<Assignment>(data.docs);
-        this.originalAssignments = new MatTableDataSource<Assignment>(data.docs);
-        this.assignments.data = newDataSource.data;
+        const newAssignments = new MatTableDataSource<Assignment>(data.docs);
+        this.originalAssignments = new MatTableDataSource<Assignment>(data.docs); // Keep the original full list
+        this.assignments.data = newAssignments.data;
+        this.count = data.totalDocs; // Total count from the backend
         this.assignments.sort = this.sort;
         this.changeDetectorRef.detectChanges();
       });
   }
+
   applyFilter() {
     let filteredData;
     switch (this.selectedFilter) {
@@ -58,12 +60,17 @@ export class AssignmentsComponent implements OnInit {
         filteredData = this.originalAssignments.data.filter(assignment => !assignment.rendu);
         break;
       default:
-        filteredData = this.originalAssignments.data; // Aucun filtre appliqué
+        filteredData = this.originalAssignments.data; // Reset to all original data
+        break;
     }
-    this.count = filteredData.length; // Mettre à jour le compte
     this.assignments = new MatTableDataSource<Assignment>(filteredData);
+    this.count = filteredData.length; // Update the count to the length of filtered data
+    this.assignments.sort = this.sort;
     this.changeDetectorRef.detectChanges();
+    // Reset paginator to the first page when the filter changes
+    this.count = this.originalAssignments.data.length;
   }
+
 
   countAll(): number {
     return this.originalAssignments.data.length;
@@ -77,10 +84,14 @@ export class AssignmentsComponent implements OnInit {
   getDataSource() {
     return this.filteredAssignments || this.assignments;
   }
-  handlePageEvent(e: PageEvent) {
-    this.limit = e.pageSize;
-    this.getData(e.pageIndex + 1);
-    this.applyFilter();
+  handlePageEvent(event: PageEvent) {
+    const pageIndex = event.pageIndex;
+    const pageSize = event.pageSize;
+    // Adjust the page number and limit according to the new page event
+    this.page = pageIndex;
+    this.limit = pageSize;
+    // Fetch new data with the updated page and limit
+    this.getData(this.page);
   }
-
+  
 }
