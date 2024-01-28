@@ -53,7 +53,7 @@ export const AuthGuardAdmin: CanActivateFn = (route:any , state: any) => {
         const snackBar = inject(MatSnackBar);
         snackBar.open("Vous n'êtes pas connecté !", 'OK', {
           duration: 2000,
-          horizontalPosition : 'center',
+          horizontalPosition : 'right',
           verticalPosition: 'top'
         });
         router.navigate(['/home']);

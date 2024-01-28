@@ -40,7 +40,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: AssignmentsComponent },
-  { path: 'add', component: AddAssignmentComponent },
+  { path: 'add', component: AddAssignmentComponent, canActivate:[AuthGuardLogged] },
   { path: 'assignment/:id', component: AssignmentDetailComponent,  canActivate:[AuthGuardLogged] },
   { path: 'assignment/:id/edit', component: EditAssignmentComponent, canActivate:[AuthGuardAdmin] },
  // { path: '**', component: AssignmentsComponent }
