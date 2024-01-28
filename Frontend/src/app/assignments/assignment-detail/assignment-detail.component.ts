@@ -76,6 +76,9 @@ export class AssignmentDetailComponent {
         .subscribe((message) => {
           console.log(message);
         });
+        this.snackBar.open("L'Assignment a été supprimé", 'OK', {
+          duration: 2000,
+        });
       this.router.navigate(['/home']);
     }
   }
