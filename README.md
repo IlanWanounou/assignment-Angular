@@ -31,6 +31,13 @@
 - **Backend**: `npm start`
 - **Frontend**: `npm start`
 
+## Login 
+
+| Login | mot de passe |  Droit admin ? |
+| ------------- | ------------- | ------------- |
+| user  | user | non  |
+| admin  | admin | oui  |
+
 ## Lieu d'Hébergement
 
 Le site est actuellement hébergé  [ici](https://angular-assignment.onrender.com/home).
