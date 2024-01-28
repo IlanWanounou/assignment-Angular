@@ -11,7 +11,7 @@
                 Auteur : {{ assignmentTransmis?.auteur }}
               </mat-card-title>
               <mat-card-subtitle>
-                Nom : {{ assignmentTransmis?.nom }}
+                Devoir : {{ assignmentTransmis?.nom }}
               </mat-card-subtitle>
             </mat-card-content>
           </mat-card>
@@ -64,6 +64,13 @@
             <mat-card-actions>
               <button mat-stroked-button color="primary" [routerLink]="['/assignment', assignmentTransmis?.id, 'edit']" [disabled]="!isAdmin">Edit</button>
               <button mat-raised-button color="warn" (click)="onDelete(assignmentTransmis)" [disabled]="!isAdmin">Delete</button>
+              <form *ngIf="isAdmin && assignmentTransmis && !assignmentTransmis.rendu">
+                <mat-form-field>
+                  <mat-label>Note</mat-label>
+                  <input type="number" min="0" max="20" matInput [(ngModel)]="assignmentTransmis.note" name="note" required>
+                </mat-form-field>
+                <button mat-raised-button  color="primary" (click)="onSubmit(assignmentTransmis)">Submit</button>
+              </form>
             </mat-card-actions>
           </mat-card>
         </div>

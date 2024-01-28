@@ -4,6 +4,7 @@ import { AssignmentsService } from '../../shared/assignments.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class AssignmentDetailComponent {
     private assignmentsService: AssignmentsService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,20 @@ export class AssignmentDetailComponent {
     }
   }
 
+  onSubmit(event: any) {
+    if (this.assignmentTransmis) {
+      this.assignmentTransmis.rendu = true;
+      this.assignmentsService
+        .updateAssignment(this.assignmentTransmis)
+        .subscribe((message) => {
+          console.log(message);
+          this.snackBar.open("L'Assignment a été noté, le status est rendu", 'OK', {
+            duration: 2000,
+          });
+          this.router.navigate(['/home']);
+        });
+    }
+  }
   onDelete(event: any) {
     if (this.assignmentTransmis) {
       this.assignmentsService
@@ -63,5 +79,4 @@ export class AssignmentDetailComponent {
       this.router.navigate(['/home']);
     }
   }
-
 }
