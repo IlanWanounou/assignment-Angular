@@ -42,7 +42,7 @@ export class AppComponent {
         this.authService.setToken(user.token);
         this.snackBar.open("Connexion réussie !", 'OK', {
           duration: 2000,
-          horizontalPosition: 'center',
+          horizontalPosition: 'right',
           verticalPosition: 'top',
         });
         this.router.navigate(['/home']);

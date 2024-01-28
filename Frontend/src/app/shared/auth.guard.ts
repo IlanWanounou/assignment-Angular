@@ -31,7 +31,7 @@ export const AuthGuardAdmin: CanActivateFn = (route:any , state: any) => {
           );
           snackBar.open("Vous n'êtes pas connecté en tant qu'admin !", 'OK', {
             duration: 2000,
-            horizontalPosition: 'center',
+            horizontalPosition: 'right',
             verticalPosition: 'top',
           });
           router.navigate(['/home']);

@@ -44,9 +44,9 @@ export class AuthService {
 
   logOut() {
     this.clearToken();
-    this.snackBar.open("Déconnexion réussie !", 'OK', {
+    this.snackBar.open('Déconnexion réussie !', 'OK', {
       duration: 2000,
-      horizontalPosition: 'center',
+      horizontalPosition: 'right',
       verticalPosition: 'top',
     });
     this.router.navigate(['/home']);
