@@ -4,6 +4,7 @@ import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
 import { MatiereService } from 'src/app/shared/matiere.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-assignment',
@@ -22,7 +23,8 @@ export class AddAssignmentComponent implements OnInit {
     private assignmentsService:AssignmentsService,
     private router: Router,
     private matiereService: MatiereService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,9 @@ export class AddAssignmentComponent implements OnInit {
 
     this.assignmentsService.addAssignment(assignment).subscribe(message => {
       console.log(message);
+      this.snackBar.open('Devoir ajouté', 'Fermer', {
+        duration: 2000,
+      });
       this.router.navigate(['/home']);
     });
   }
