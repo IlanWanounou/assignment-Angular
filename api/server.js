@@ -4,15 +4,15 @@ let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let user = require('./routes/user');
 let matiere = require('./routes/matiere');
+require("dotenv").config();
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.set('debug', true);
 
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
-//  "mongodb+srv://wanounouilan:pRPZIwFadF9Zdeyy@angularmiage.zmh9zia.mongodb/assignments?retryWrites=true&w=majority";
 const uri =
-  "mongodb+srv://wanounouilan:pRPZIwFadF9Zdeyy@angularmiage.zmh9zia.mongodb.net/assignments?retryWrites=true&w=majority";
+  process.env.MONGODB_URI ;
 
 const options = {
   useNewUrlParser: true,
