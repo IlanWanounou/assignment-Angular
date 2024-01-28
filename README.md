@@ -3,7 +3,7 @@
 ## Auteur
 
 - Ilan Wanounou
-- Raph Modad
+- Ralph Modad
 ## Installation (Backend)
 
 ### Étapes d'installation
