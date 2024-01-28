@@ -1,5 +1,6 @@
 let Assignment = require("../model/assignment");
 let Matiere = require("../model/matiere");
+let Counter = require("../model/counters");
 
 // Récupérer tous les assignments (GET)
 const getAssignments = (req, res) => {
@@ -52,8 +53,14 @@ function getAssignment(req, res) {
 async function postAssignment(req, res) {
     // MongoDB doest not auto increment the id field like SQL database, so we have to do it manually.
     let assignment = new Assignment();
-    const count = await Assignment.countDocuments({});
-    assignment.id = count + 1;
+    const count = await Counter.findOneAndUpdate(
+      { _id: "assignmentId" },
+      { $inc: { seq: 1 } },
+      { new: true, upsert: false }
+    );
+
+    console.log("count: ", count)
+    assignment.id = count.seq;
     assignment.nom = req.body.nom;
     assignment.dateDeRendu = req.body.dateDeRendu;
     assignment.rendu = req.body.rendu;
